@@ -10,23 +10,26 @@ import SwiftUI
 @main
 struct HaiQuriApp: App {
     init() {
-        //NavigationBarの設定
-               let appearance = UINavigationBarAppearance()
-               appearance.configureWithOpaqueBackground()
-               appearance.backgroundColor = .blue  // ナビゲーションバーの背景色
-               appearance.titleTextAttributes = [.foregroundColor: UIColor.white]  // タイトルの色
-               appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]  // 大きなタイトルの色
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
 
-               // ナビゲーションバーとスクロールビューの間の透明な境界線を削除
-               appearance.shadowColor = nil
+        // カスタムカラーをUIColorとして参照し、ナビゲーションバーの背景色に設定
+        if let backgroundColor = UIColor(named: "TopBarColor") {
+            appearance.backgroundColor = backgroundColor
+        }
 
-               //Navigationbarの標準の外観にする
-               UINavigationBar.appearance().standardAppearance = appearance
-               //スクロールしたとき
-               UINavigationBar.appearance().scrollEdgeAppearance = appearance
-               //横向きの設定
-               UINavigationBar.appearance().compactAppearance = appearance // For iPhone small navigation bar in landscape.
-       }
+        // タイトルの色を白に設定
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+        // ナビゲーションバーの境界線を削除
+        appearance.shadowColor = nil
+
+        // 設定を適用
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+    }
     var body: some Scene {
         WindowGroup {
             ContentView()
