@@ -33,6 +33,7 @@ class Logic: ObservableObject {
         do {
             let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
             csvContents = csvString.components(separatedBy: .newlines)
+            print(csvContents)
         } catch {
             print("なにかしらエラー")
         }
@@ -40,22 +41,26 @@ class Logic: ObservableObject {
 // readCSVをした後文字列の配列だったものをsacredPlace構造体に適応させ、それをconvertedCSVtoSacredPlacesに格納するメソッド
     func convertCSVtoSacredPlace() {
         for index in 0..<csvContents.count {
-            let csvContentConponent: [String] = csvContents[index].components(separatedBy: ",")
-            let id = csvContentConponent[0]
-            let title = csvContentConponent[1]
-            let placeName = csvContentConponent[3]
-            let adress = csvContentConponent[4]
-            let latitude = csvContentConponent[6].doubleValue() ?? 0.00
-            let longitude = csvContentConponent[7].doubleValue() ?? 0.00
-            let sacredPlaceDetail = sacredPlace(
-                id: id,
-                title: title,
-                placeName: placeName,
-                adress: adress,
-                latitude: latitude,
-                longitude: longitude
-            )
-            convertedCSVtoSacredPlaces.append(sacredPlaceDetail)
+            if csvContents[index] == "" {
+                print("空によりスキップ")
+            } else {
+                let csvContentConponent: [String] = csvContents[index].components(separatedBy: ",")
+                let id = csvContentConponent[0]
+                let title = csvContentConponent[1]
+                let placeName = csvContentConponent[3]
+                let adress = csvContentConponent[4]
+                let latitude = csvContentConponent[6].doubleValue() ?? 0.00
+                let longitude = csvContentConponent[7].doubleValue() ?? 0.00
+                let sacredPlaceDetail = sacredPlace(
+                    id: id,
+                    title: title,
+                    placeName: placeName,
+                    adress: adress,
+                    latitude: latitude,
+                    longitude: longitude
+                )
+                convertedCSVtoSacredPlaces.append(sacredPlaceDetail)
+            }
         }
     }
 // 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
