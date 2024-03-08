@@ -21,10 +21,10 @@ struct sacredPlace: Identifiable {
 class Logic: ObservableObject {
     @Published var animeTitle: String = ""
     @Published var animeSubTitle: String = ""
-    @Published var convertedCSVtoSacredPlace: [sacredPlace] = []
+    @Published var convertedCSVtoSacredPlaces: [sacredPlace] = []
     @Published var annotations: [MKPointAnnotation] = []
     var csvContents: [String] = []
-
+// csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
         guard let path = Bundle.main.path(forResource: "seichi", ofType: "csv") else {
             print("データソースがありませんぴえん")
@@ -37,6 +37,7 @@ class Logic: ObservableObject {
             print("なにかしらエラー")
         }
     }
+// readCSVをした後文字列の配列だったものをsacredPlace構造体に適応させ、それをconvertedCSVtoSacredPlacesに格納するメソッド
     func convertCSVtoSacredPlace() {
         for index in 0..<csvContents.count {
             let csvContentConponent: [String] = csvContents[index].components(separatedBy: ",")
@@ -54,13 +55,15 @@ class Logic: ObservableObject {
                 latitude: latitude,
                 longitude: longitude
             )
-            convertedCSVtoSacredPlace.append(sacredPlaceDetail)
+            convertedCSVtoSacredPlaces.append(sacredPlaceDetail)
         }
     }
+// 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
     func serchPlacesUsingAnimeTitle(title: String) {
-        let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlace.filter({$0.title.contains(title)})
+        let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlaces.filter({$0.title.contains(title)})
         createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
     }
+//  SacredPlacesからannotationを作成する
     func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
         for annotationOrigin in convertedCSVtoSacredPlaces {
             let annotation = MKPointAnnotation()
