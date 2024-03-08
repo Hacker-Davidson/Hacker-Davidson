@@ -31,7 +31,12 @@ struct HalfSheetDetails: View {
     var body: some View {
         ZStack {
             Text("aaaaaa")
-                .font(.title)
+            .offset(x: 0, y: -150)
+            .font(.title)
+            SecredPlaceName()
+                .offset(x: 0, y: -70)
+            SecredAdress()
+                .offset(x: 16, y: 50)
 
         }
     }
@@ -43,7 +48,7 @@ struct SecredPlaceName: View {
         ZStack {
             HStack {
                 Text("聖地名")
-                    .font(.system(size: 40))
+                    .font(.system(size: 24))
                     .offset(x: -100,y: 0)
                 Text("aaa")
             }
@@ -59,13 +64,13 @@ struct SecredAdress: View {
         ZStack {
             HStack {
                 Text("聖地のある住所")
-                    .font(.system(size: 40))
-                    .offset(x: -100,y: 0)
+                    .font(.system(size: 20))
+                    .offset(x: -80,y: 0)
                 Text("aaaaaaa")
             }
             Divider()
                 .frame(width: 360,height: 20)
-                .offset(x: 0,y: 30)
+                .offset(x: -10,y: 30)
         }
     }
 }
