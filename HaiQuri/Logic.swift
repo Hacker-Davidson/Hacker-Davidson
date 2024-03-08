@@ -21,10 +21,9 @@ struct sacredPlace: Identifiable {
 class Logic: ObservableObject {
     @Published var animeTitle: String = ""
     @Published var animeSubTitle: String = ""
-    let csvContents: [String] = []
-    let 
     @Published var convertedCSVtoSacredPlace: [sacredPlace] = []
     @Published var annotations: [MKPointAnnotation] = []
+    @Published var filteredAnnotations: [MKPointAnnotation] = []
     var csvContents: [String] = []
 
     func readCSV() {
