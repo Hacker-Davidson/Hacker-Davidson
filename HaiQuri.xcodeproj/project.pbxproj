@@ -277,9 +277,8 @@
 				DEVELOPMENT_TEAM = 922N7TF68N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HaiQuri/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "現在地を許可しますか";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在地を許可しますか";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "現在地の取得を許可しますか";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -309,9 +308,8 @@
 				DEVELOPMENT_TEAM = 922N7TF68N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HaiQuri/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "現在地を許可しますか";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在地を許可しますか";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "現在地の取得を許可しますか";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
