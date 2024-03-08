@@ -27,6 +27,18 @@ class Logic: ObservableObject {
     @Published var annotations: [MKPointAnnotation] = []
     var csvContents: [String] = []
 
+    func readCSV() {
+        guard let path = Bundle.main.path(forResource: "seichi", ofType: "csv") else {
+            print("データソースがありませんぴえん")
+            return
+        }
+        do {
+            let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            csvContents = csvString.components(separatedBy: .newlines)
+        } catch {
+            print("なにかしらのエラー")
+        }
+    }
 
 
 }
