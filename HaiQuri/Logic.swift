@@ -60,6 +60,15 @@ class Logic: ObservableObject {
 
         func serchForAnimeTitle(title: String) {
 
+    func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
+        for annotationOrigin in convertedCSVtoSacredPlaces {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: annotationOrigin.latitude, longitude: annotationOrigin.longitude)
+            annotation.title = annotationOrigin.title
+            annotation.subtitle = annotationOrigin.placeName
+            annotations.append(annotation)
+        }
+    }
         }
     }
 
