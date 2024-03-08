@@ -33,6 +33,7 @@ class Logic: ObservableObject {
         do {
             let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
             csvContents = csvString.components(separatedBy: .newlines)
+            print(csvContents)
         } catch {
             print("なにかしらエラー")
         }
