@@ -24,6 +24,18 @@ struct MapView: UIViewControllerRepresentable {
     }
 
 }
+class MapViewController: UIViewController {
+    @ObservedObject var Logics = Logic()
+    var locationManager = CLLocationManager()
+    var mainMapView: MKMapView?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Logics.startCreatePin()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
+}
     }
 }
 
