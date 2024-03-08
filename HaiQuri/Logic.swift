@@ -38,7 +38,32 @@ class Logic: ObservableObject {
             print("なにかしらのエラー")
         }
     }
+    func convertCSVtoSacredPlace() {
+        for index in 0..<csvContents.count {
+            let csvContentConponent: [String] = csvContents[index].components(separatedBy: ",")
+            let id = csvContentConponent[0]
+            let title = csvContentConponent[1]
+            let placeName = csvContentConponent[3]
+            let adress = csvContentConponent[4]
+            let latitude = csvContentConponent[6].doubleValue() ?? 0.00
+            let longitude = csvContentConponent[7].doubleValue() ?? 0.00
+            let sacredPlaceDetail = sacredPlace(
+                id: id,
+                title: title,
+                placeName: placeName,
+                adress: adress,
+                latitude: latitude,
+                longitude: longitude
+            )
+            convertedCSVtoSacredPlace.append(sacredPlaceDetail)
+        }
 
+        func serchForAnimeTitle(title: String) {
+
+        }
+    }
+
+}
 extension NumberFormatter {
     static var csvNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
