@@ -39,5 +39,16 @@ class Logic: ObservableObject {
         }
     }
 
+extension NumberFormatter {
+    static var csvNumberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }
+}
 
+extension String {
+    func doubleValue(with formatter: NumberFormatter = .csvNumberFormatter) -> Double? {
+        return formatter.number(from: self)?.doubleValue
+    }
 }
