@@ -59,7 +59,9 @@ class Logic: ObservableObject {
         }
 
         func serchForAnimeTitle(title: String) {
-
+            let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlace.filter({$0.title.contains(title)})
+            createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
+        }
     func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
         for annotationOrigin in convertedCSVtoSacredPlaces {
             let annotation = MKPointAnnotation()
