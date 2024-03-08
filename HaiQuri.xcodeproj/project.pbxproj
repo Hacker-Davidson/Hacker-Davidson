@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A1ED582B9AA49E005E1AAD /* seichi.csv in Resources */ = {isa = PBXBuildFile; fileRef = 08A1ED572B9AA49E005E1AAD /* seichi.csv */; };
+		08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1ED592B9AA559005E1AAD /* Logic.swift */; };
 		3B20BB5B2B9A9CDD00A720EA /* HaiQuriApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */; };
 		3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */; };
 		3B20BB5F2B9A9CDF00A720EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B20BB5E2B9A9CDF00A720EA /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08A1ED572B9AA49E005E1AAD /* seichi.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seichi.csv; sourceTree = "<group>"; };
+		08A1ED592B9AA559005E1AAD /* Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic.swift; sourceTree = "<group>"; };
 		3B20BB572B9A9CDD00A720EA /* HaiQuri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaiQuri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaiQuriApp.swift; sourceTree = "<group>"; };
 		3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 			children = (
 				3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */,
 				3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */,
+				08A1ED592B9AA559005E1AAD /* Logic.swift */,
+				08A1ED572B9AA49E005E1AAD /* seichi.csv */,
 				3B20BB5E2B9A9CDF00A720EA /* Assets.xcassets */,
 				3B20BB602B9A9CDF00A720EA /* Preview Content */,
 			);
@@ -126,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B20BB622B9A9CDF00A720EA /* Preview Assets.xcassets in Resources */,
+				08A1ED582B9AA49E005E1AAD /* seichi.csv in Resources */,
 				3B20BB5F2B9A9CDF00A720EA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */,
+				08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */,
 				3B20BB5B2B9A9CDD00A720EA /* HaiQuriApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
