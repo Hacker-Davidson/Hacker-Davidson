@@ -23,7 +23,6 @@ class Logic: ObservableObject {
     @Published var animeSubTitle: String = ""
     @Published var convertedCSVtoSacredPlace: [sacredPlace] = []
     @Published var annotations: [MKPointAnnotation] = []
-    @Published var filteredAnnotations: [MKPointAnnotation] = []
     var csvContents: [String] = []
 
     func readCSV() {
@@ -35,7 +34,7 @@ class Logic: ObservableObject {
             let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
             csvContents = csvString.components(separatedBy: .newlines)
         } catch {
-            print("なにかしらのエラー")
+            print("なにかしらエラー")
         }
     }
     func convertCSVtoSacredPlace() {
@@ -57,7 +56,7 @@ class Logic: ObservableObject {
             )
             convertedCSVtoSacredPlace.append(sacredPlaceDetail)
         }
-
+    }
         func serchForAnimeTitle(title: String) {
             let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlace.filter({$0.title.contains(title)})
             createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
@@ -74,7 +73,6 @@ class Logic: ObservableObject {
         }
     }
 
-}
 extension NumberFormatter {
     static var csvNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
