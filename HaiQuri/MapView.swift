@@ -97,6 +97,17 @@ extension MapViewController: CLLocationManagerDelegate {
 
         }
     }
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        // タップされたアノテーションの情報を取得する
+        if let annotation = view.annotation {
+            // アノテーションから情報を取得する処理
+            Logics.animeTitle = annotation.title as? String ?? ""
+            Logics.animeSubTitle = annotation.subtitle as? String ?? ""
+        }
+    }
+
+
 }
 
 #Preview {
