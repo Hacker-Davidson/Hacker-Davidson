@@ -12,10 +12,13 @@ struct ContentView: View {
         NavigationView {
             ZStack {  // --- 1
                 FloatButton()
+///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
+                RouteFinishButton()
             }
             .toolbar {
                 customToolbarItems
             }
+            
         }
         //戻るボタン色変更
         .accentColor(Color.red)
@@ -23,7 +26,7 @@ struct ContentView: View {
 }
 
 
-
+//掲示板に飛ぶボタン
 struct FloatButton: View {
     var body: some View {
         HStack { // --- 2
@@ -48,6 +51,30 @@ struct FloatButton: View {
     }
 }
 
+//経路案内終了ボタン
+struct RouteFinishButton: View {
+    var body: some View {
+        HStack { // --- 2
+            NavigationLink(destination: ContentView()) {
+                HStack {
+                    Spacer()
+                    Image(systemName: "pencil")
+                    Text("案内終了")
+                    Spacer()
+                }
+            }
+            .foregroundColor(.white)
+            .font(.system(size: 24))
+
+        }
+        .frame(width: 130, height: 60)
+        .background(.blue)
+        .cornerRadius(30.0)
+        .shadow(color: .gray, radius: 3, x: 3, y: 3)
+        .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0)) // --- 5
+        .offset(x: 124, y: -180)
+    }
+}
 
 //ToolBarカスタム
 extension ContentView {

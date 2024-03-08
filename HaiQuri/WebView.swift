@@ -8,6 +8,7 @@
 import SwiftUI
 import WebKit
 
+//WebView
 struct WebView: UIViewRepresentable {
     let loadUrl: URL
 
@@ -21,6 +22,7 @@ struct WebView: UIViewRepresentable {
     }
 }
 
+//じゅんちゃんの前作ったやつ(テスト用)
 struct ChatView: View {
     var body: some View {
         WebView(loadUrl: URL(string: "http://website0.php.xdomain.jp/")!)
