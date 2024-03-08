@@ -23,6 +23,9 @@ class Logic: ObservableObject {
     @Published var animeSubTitle: String = ""
     let csvContents: [String] = []
     let 
+    @Published var convertedCSVtoSacredPlace: [sacredPlace] = []
+    @Published var annotations: [MKPointAnnotation] = []
+    var csvContents: [String] = []
 
 
 
