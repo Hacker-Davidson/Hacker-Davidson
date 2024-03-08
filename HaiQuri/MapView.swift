@@ -36,6 +36,66 @@ class MapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
 }
+extension MapViewController: CLLocationManagerDelegate {
+
+    private func setupMapView() {
+        let topPadding: CGFloat = 0
+        let bottomPadding: CGFloat = -50
+        let leftPadding: CGFloat = 0
+        let rightPadding: CGFloat = 0
+        
+        let mapView = MKMapView()
+        mapView.delegate = self
+        self.mainMapView = mapView
+        
+        let screenWidth = view.frame.size.width
+        let screenHeight = view.frame.size.height
+        
+        let rect = CGRect(x: leftPadding,
+                          y: topPadding,
+                          width: screenWidth - leftPadding - rightPadding,
+                          height: screenHeight - topPadding - bottomPadding)
+        
+        mapView.frame = rect
+        var region: MKCoordinateRegion = mapView.region
+        region.center = mapView.userLocation.coordinate
+        region.span.latitudeDelta = 0.02
+        region.span.longitudeDelta = 0.02
+        
+        mapView.setRegion(region, animated: true)
+        self.view.addSubview(mapView)
+        mapView.mapType = .hybrid
+        mapView.userTrackingMode = .follow
+        mapView.userTrackingMode = .followWithHeading
+        DispatchQueue.main.async {
+            self.Logics.startCreatePin()
+        }
+        DispatchQueue.main.async {
+            self.Logics.createAnnotations(convertedCSVtoSacredPlaces: self.Logics.convertedCSVtoSacredPlaces)
+        }
+        DispatchQueue.main.async {
+            for annotation in self.Logics.annotations {
+                mapView.addAnnotation(annotation)
+            }
+        }
+    }
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .authorizedWhenInUse:
+                // 位置情報の更新を開始
+                self.locationManager.startUpdatingLocation()
+                setupMapView()
+            case .denied:
+                // 位置情報サービスが拒否された場合の処理
+                print("Location services denied")
+            case .restricted:
+                // 位置情報サービスが制限された場合の処理
+                print("Location services restricted")
+            default:
+                break
+            }
+
+        }
     }
 }
 
