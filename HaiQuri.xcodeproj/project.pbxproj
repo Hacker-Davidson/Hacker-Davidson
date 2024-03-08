@@ -65,11 +65,11 @@
 				3B20BB6B2B9AABD200A720EA /* Info.plist */,
 				3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */,
 				3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */,
+				08A1ED592B9AA559005E1AAD /* Logic.swift */,
+				08A1ED572B9AA49E005E1AAD /* seichi.csv */,
 				3B20BB6E2B9AC4B800A720EA /* WebView.swift */,
 				3B20BB6C2B9ABB0500A720EA /* ColorExtension.swift */,
 				3B20BB702B9AC7C900A720EA /* Halfmodal.swift */,
-				08A1ED592B9AA559005E1AAD /* Logic.swift */,
-				08A1ED572B9AA49E005E1AAD /* seichi.csv */,
 				3B20BB5E2B9A9CDF00A720EA /* Assets.xcassets */,
 				3B20BB602B9A9CDF00A720EA /* Preview Content */,
 			);
@@ -157,8 +157,8 @@
 			files = (
 				3B20BB6F2B9AC4B800A720EA /* WebView.swift in Sources */,
 				3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */,
-				3B20BB712B9AC7C900A720EA /* Halfmodal.swift in Sources */,
 				08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */,
+				3B20BB712B9AC7C900A720EA /* Halfmodal.swift in Sources */,
 				3B20BB5B2B9A9CDD00A720EA /* HaiQuriApp.swift in Sources */,
 				3B20BB6D2B9ABB0500A720EA /* ColorExtension.swift in Sources */,
 			);
