@@ -57,10 +57,10 @@ class Logic: ObservableObject {
             convertedCSVtoSacredPlace.append(sacredPlaceDetail)
         }
     }
-        func serchForAnimeTitle(title: String) {
-            let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlace.filter({$0.title.contains(title)})
-            createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
-        }
+    func serchPlacesUsingAnimeTitle(title: String) {
+        let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlace.filter({$0.title.contains(title)})
+        createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
+    }
     func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
         for annotationOrigin in convertedCSVtoSacredPlaces {
             let annotation = MKPointAnnotation()
@@ -70,8 +70,15 @@ class Logic: ObservableObject {
             annotations.append(annotation)
         }
     }
+    func startCreatePin() {
+        DispatchQueue.main.async {
+            self.readCSV()
+        }
+        DispatchQueue.main.async {
+            self.convertCSVtoSacredPlace()
         }
     }
+}
 
 extension NumberFormatter {
     static var csvNumberFormatter: NumberFormatter {
@@ -86,3 +93,4 @@ extension String {
         return formatter.number(from: self)?.doubleValue
     }
 }
+
