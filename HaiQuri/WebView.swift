@@ -10,10 +10,12 @@ import WebKit
 
 //WebView
 struct WebView: UIViewRepresentable {
-    let loadUrl: URL
+    let loadUrl: URL = URL(string: "http://website0.php.xdomain.jp")!
 
     func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
+        print("表示します")
+        let webView = WKWebView()
+        return webView
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
@@ -25,7 +27,7 @@ struct WebView: UIViewRepresentable {
 //じゅんちゃんの前作ったやつ(テスト用)
 struct ChatView: View {
     var body: some View {
-        WebView(loadUrl: URL(string: "http://website0.php.xdomain.jp/")!)
+        WebView()
             .edgesIgnoringSafeArea(.all) // オプション: セーフエリアを無視して全画面で表示
     }
 }
