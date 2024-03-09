@@ -85,9 +85,11 @@ class Logic: ObservableObject {
         }
         createAnnotations(filterInfo: filteredContents)
     }
-//  SacredPlacesからannotationを作成する
-    func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
-        for annotationOrigin in convertedCSVtoSacredPlaces {
+
+    //  SacredPlacesからannotationを作成する
+    func createAnnotations(filterInfo: [sacredPlace]) {
+        annotations.removeAll()
+        for annotationOrigin in filterInfo {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: annotationOrigin.latitude, longitude: annotationOrigin.longitude)
             annotation.title = annotationOrigin.title
