@@ -25,7 +25,7 @@ class Logic: ObservableObject {
     @Published var annotations: [MKPointAnnotation] = []
     @Published var filteredContents: [sacredPlace] = []
     @Published var deleteAnnotations: [MKPointAnnotation] = []
-
+    
     var csvContents: [String] = []
     // csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
@@ -65,16 +65,17 @@ class Logic: ObservableObject {
                 convertedCSVtoSacredPlaces.append(sacredPlaceDetail)
             }
         }
+        
     }
     // 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
     func serchPlacesUsingAnimeTitle(title: String) {
         annotations.removeAll()
         convertedCSVtoSacredPlaces.removeAll()
         filteredContents.removeAll()
-
+        
         readCSV()
         convertCSVtoSacredPlace()
-
+        
         for content in convertedCSVtoSacredPlaces {
             if  content.title == title {
                 filteredContents.append(content)
@@ -85,7 +86,7 @@ class Logic: ObservableObject {
         }
         createAnnotations(filterInfo: filteredContents)
     }
-
+    
     //  SacredPlacesからannotationを作成する
     func createAnnotations(filterInfo: [sacredPlace]) {
         annotations.removeAll()
@@ -96,7 +97,9 @@ class Logic: ObservableObject {
             annotation.subtitle = annotationOrigin.placeName
             annotations.append(annotation)
         }
+        
     }
+    
     func startCreatePin() {
         DispatchQueue.main.async {
             self.readCSV()
