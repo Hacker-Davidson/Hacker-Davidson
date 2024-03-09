@@ -21,7 +21,8 @@ struct MapView: UIViewRepresentable {
         let bottomPadding: CGFloat = -50
         let leftPadding: CGFloat = 0
         let rightPadding: CGFloat = 0
-        
+        let screenWidth = mapView.frame.size.width
+        let screenHeight = mapView.frame.size.height
         let rect = CGRect(x: leftPadding,
                           y: topPadding,
                           width: screenWidth - leftPadding - rightPadding,
