@@ -1,0 +1,55 @@
+//
+//  File.swift
+//  HaiQuri
+//
+//  Created by 櫻井絵理香 on 2024/03/09.
+//
+
+import CoreData
+
+struct PersistenceController {
+    static let shared = PersistenceController()
+
+    static var preview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        for _ in 0..<10 {
+            //　各々のEntity名、Attribute名でカスタムしてください
+            /*
+             let newEntity名 = Entity名(context: viewContext)
+             newEntity名.Attribute名 = 初期値
+             */
+            let newEntity = Entity(context: viewContext)
+             newEntity.title = ""
+            newEntity.mapID = ""
+            newEntity.latitude = 0.0
+            newEntity.logitude = 0.0
+            newEntity.placeName = ""
+            newEntity.adress = ""
+            newEntity.isFavorite = false
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
+
+    let container: NSPersistentContainer
+
+    init(inMemory: Bool = false) {
+        // ここはエンティティ名ではなく、モデル名
+        container = NSPersistentContainer(name: "HaiQuri")
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+}

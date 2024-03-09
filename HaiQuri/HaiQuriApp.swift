@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct HaiQuriApp: App {
-    
+    let presisitenceController = PersistenceController.shared
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -34,6 +34,7 @@ struct HaiQuriApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, presisitenceController.container.viewContext)
         }
     }
 }
