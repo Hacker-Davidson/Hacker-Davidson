@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct HaiQuriApp: App {
+    
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
