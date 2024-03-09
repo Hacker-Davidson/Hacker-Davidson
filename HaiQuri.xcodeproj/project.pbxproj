@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		08A1ED582B9AA49E005E1AAD /* seichi.csv in Resources */ = {isa = PBXBuildFile; fileRef = 08A1ED572B9AA49E005E1AAD /* seichi.csv */; };
 		08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1ED592B9AA559005E1AAD /* Logic.swift */; };
+		08F6F25B2B9C6C1700BC9AB2 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */; };
+		08F6F25D2B9C6CE300BC9AB2 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F25C2B9C6CE300BC9AB2 /* MapView.swift */; };
 		3B20BB5B2B9A9CDD00A720EA /* HaiQuriApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */; };
 		3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */; };
 		3B20BB5F2B9A9CDF00A720EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B20BB5E2B9A9CDF00A720EA /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* Begin PBXFileReference section */
 		08A1ED572B9AA49E005E1AAD /* seichi.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seichi.csv; sourceTree = "<group>"; };
 		08A1ED592B9AA559005E1AAD /* Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic.swift; sourceTree = "<group>"; };
+		08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		08F6F25C2B9C6CE300BC9AB2 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3B20BB572B9A9CDD00A720EA /* HaiQuri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaiQuri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaiQuriApp.swift; sourceTree = "<group>"; };
 		3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,10 +66,12 @@
 		3B20BB592B9A9CDD00A720EA /* HaiQuri */ = {
 			isa = PBXGroup;
 			children = (
+				08F6F25C2B9C6CE300BC9AB2 /* MapView.swift */,
 				3B20BB6B2B9AABD200A720EA /* Info.plist */,
 				3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */,
 				3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */,
 				08A1ED592B9AA559005E1AAD /* Logic.swift */,
+				08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */,
 				08A1ED572B9AA49E005E1AAD /* seichi.csv */,
 				3B20BB6E2B9AC4B800A720EA /* WebView.swift */,
 				3B20BB6C2B9ABB0500A720EA /* ColorExtension.swift */,
@@ -156,6 +162,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B20BB6F2B9AC4B800A720EA /* WebView.swift in Sources */,
+				08F6F25D2B9C6CE300BC9AB2 /* MapView.swift in Sources */,
+				08F6F25B2B9C6C1700BC9AB2 /* SearchBar.swift in Sources */,
 				3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */,
 				08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */,
 				3B20BB712B9AC7C900A720EA /* Halfmodal.swift in Sources */,
@@ -294,7 +302,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HaiQuri/Preview Content\"";
-				DEVELOPMENT_TEAM = 922N7TF68N;
+				DEVELOPMENT_TEAM = 5285K4Z956;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HaiQuri/Info.plist;
@@ -326,7 +334,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HaiQuri/Preview Content\"";
-				DEVELOPMENT_TEAM = 922N7TF68N;
+				DEVELOPMENT_TEAM = 5285K4Z956;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HaiQuri/Info.plist;
