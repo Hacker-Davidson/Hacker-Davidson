@@ -32,7 +32,6 @@ struct SearchBar: View {
                     }
                 }
                 Button(action: {
-                    logic.createDeleteAnnotations(filterInfo: logic.filteredContents)
                     logic.serchPlacesUsingAnimeTitle(title: inputText)
                 }, label: {
                     Text("検索")

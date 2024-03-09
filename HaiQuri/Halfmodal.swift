@@ -4,12 +4,12 @@ import CoreData
 struct HalfsheetView: View {
     //追加
     @State var isShowSheet = false
-    @State var adress = "愛知県"
-    @State var title = "タイトル名"
+    @State var adress = "愛知県名古屋市東区星崎町5453"
+    @State var title = "影の実力者になりたくて"
     @State var latitude = 0.0
     @State var longitude = 0.0
     @State var id = "123457" // このidは保存ずみ
-    @State var placeName = "体育館"
+    @State var placeName = "めっちゃすごい体育館"
 
     var body: some View {
         Button("シートを表示") {
@@ -43,67 +43,92 @@ struct HalfSheetDetails: View {
     @State var placeName: String
 
     var body: some View {
-        VStack {
-            HStack {
+        ZStack {
+            Button{
+                           print("経路案内")
+                       }label: {
+                           NavigationLink(destination: ContentView()) {
+                               HStack {
+                                   Image(systemName: "location.fill")
+                                   Text("経路")
+                                       .font(.title)
+                               }
+                           }
+                           .frame(width: 130, height: 60)
+                           .foregroundColor(.white)
+                           .background(Color.customButtonColor)
+                           .cornerRadius(30.0)
+                           .shadow(radius: 3)
+                           .padding(.top, 150)
+                       }
+                       .onAppear{
+                           checkIfAlreadyFavorited()
+                           //idが一致しているかどうかを調べる
+                       }
+                       .frame(maxWidth: .infinity, maxHeight: .infinity)
+                       .background(Color.white)
+                       .offset(x: 0, y: 80)
+            VStack {
                 Spacer()
-                Text(title)
-                    .font(.title)
-                Text(placeName)
-                Spacer()
-                // いいねボタン
-                Button{
-                    // ボタンがタップされたときに isFavorited の状態をトグルする
-                    print("トグル変更")
-                    isFavorited.toggle()
-                    //押されたタイミングでデータ取得したい
-                    addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id,placeName: placeName)
-                }label: {
-                    // isFavorited の値に基づいて異なるアイコンを表示
-                    Image(systemName: isFavorited ? "heart.fill" : "heart")
-                        .font(.title)
-                        .foregroundColor(isFavorited ? .red : .gray) // お気に入りの状態によって色も変更する
-                }
-                Spacer()
-            }
-
-            VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Spacer()
-                    Text("聖地の住所")
-                        .font(.system(size: 20))
-                    Text(adress)
+                    Text(title)
+                        .font(.title)
+                    Spacer()
+                    // いいねボタン
+                    Button{
+                        // ボタンがタップされたときに isFavorited の状態をトグルする
+                        print("トグル変更")
+                        isFavorited.toggle()
+                        //押されたタイミングでデータ取得したい
+                        addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id,placeName: placeName)
+                    }label: {
+                        // isFavorited の値に基づいて異なるアイコンを表示
+                        Image(systemName: isFavorited ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavorited ? .red : .gray) // お気に入りの状態によって色も変更する
+                    }
+                    .offset(x: -10,y: 0)
                     Spacer()
                 }
-
-                Divider()
-                    .frame(height: 1)
-                    .background(Color.gray.opacity(0.5))
-                    .padding(.vertical, 4)
-            }
-            .padding(.horizontal)
-            Button{
-                print("経路案内")
-            }label: {
-                NavigationLink(destination: ContentView()) {
+                .offset(x: 20, y:-150)
+                VStack {
                     HStack {
-                        Image(systemName: "location.fill")
-                        Text("経路")
-                            .font(.title)
+                        Spacer()
+                        Text("聖地名")
+                            .font(.system(size: 22))
+                        Spacer()
+                        Text(placeName)
+                            .font(.system(size: 21))
+                        Spacer()
                     }
+                    Divider()
+                        .frame(height: 1)
+                        .background(Color.gray.opacity(0.5))
+                        .padding(.horizontal, 20)
+                        .offset(x:0, y: -10)
                 }
-                .frame(width: 130, height: 60)
-                .foregroundColor(.white)
-                .background(Color.customButtonColor)
-                .cornerRadius(30.0)
-                .shadow(radius: 3)
-                .padding(.top, 150)
+                .offset(x: 0,y: -90)
+
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("聖地の住所")
+                            .font(.system(size: 22))
+                        Spacer()
+                        Text(adress)
+                            .font(.system(size: 21))
+                        Spacer()
+                    }
+                    Divider()
+                        .frame(height: 1)
+                        .background(Color.gray.opacity(0.5))
+                        .padding(.horizontal, 20)
+                        .offset(x:0, y: -10)
+                }
+                .offset(x: 0,y: -40)
             }
-            .onAppear{
-                checkIfAlreadyFavorited()
-                //idが一致しているかどうかを調べる
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white)
+            .offset(x: 0, y: -80)
         }
     }
     func addLike (title: String, latitude: Double, longitude: Double, adress: String, mapID: String, placeName: String){
@@ -143,15 +168,18 @@ struct HalfSheetDetails: View {
     }
 
     // お気に入りがすでに登録されているか確認する関数
-      func checkIfAlreadyFavorited() {
-          if let _ = entityList.first(where: { $0.mapID == id }) {
-              // id が一致するエンティティが見つかった場合
-              self.isFavorited = true
-              print(entityList)
-          }
-          // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
-      }
+    func checkIfAlreadyFavorited() {
+        if let _ = entityList.first(where: { $0.mapID == id }) {
+            // id が一致するエンティティが見つかった場合
+            self.isFavorited = true
+            print(entityList)
+        }
+        // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
+    }
 
 }
 
 
+#Preview ("ハーフモーダル"){
+    HalfsheetView()
+}
