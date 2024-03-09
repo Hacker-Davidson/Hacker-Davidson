@@ -23,6 +23,9 @@ class Logic: ObservableObject {
     @Published var animeSubTitle: String = ""
     @Published var convertedCSVtoSacredPlaces: [sacredPlace] = []
     @Published var annotations: [MKPointAnnotation] = []
+    @Published var filteredContents: [sacredPlace] = []
+    @Published var deleteAnnotations: [MKPointAnnotation] = []
+
     var csvContents: [String] = []
 // csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
