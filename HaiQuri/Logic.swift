@@ -27,7 +27,7 @@ class Logic: ObservableObject {
     @Published var deleteAnnotations: [MKPointAnnotation] = []
 
     var csvContents: [String] = []
-// csvからデータを読み込んで配列に追加するメソッド
+    // csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
         guard let path = Bundle.main.path(forResource: "seichi", ofType: "csv") else {
             print("データソースがありませんぴえん")
@@ -41,7 +41,7 @@ class Logic: ObservableObject {
             print("なにかしらエラー")
         }
     }
-// readCSVをした後文字列の配列だったものをsacredPlace構造体に適応させ、それをconvertedCSVtoSacredPlacesに格納するメソッド
+    // readCSVをした後文字列の配列だったものをsacredPlace構造体に適応させ、それをconvertedCSVtoSacredPlacesに格納するメソッド
     func convertCSVtoSacredPlace() {
         for index in 0..<csvContents.count {
             if csvContents[index] == "" {
@@ -66,7 +66,7 @@ class Logic: ObservableObject {
             }
         }
     }
-// 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
+    // 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
     func serchPlacesUsingAnimeTitle(title: String) {
         let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlaces.filter({$0.title.contains(title)})
         createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
