@@ -68,8 +68,22 @@ class Logic: ObservableObject {
     }
     // 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
     func serchPlacesUsingAnimeTitle(title: String) {
-        let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlaces.filter({$0.title.contains(title)})
-        createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
+        annotations.removeAll()
+        convertedCSVtoSacredPlaces.removeAll()
+        filteredContents.removeAll()
+
+        readCSV()
+        convertCSVtoSacredPlace()
+
+        for content in convertedCSVtoSacredPlaces {
+            if  content.title == title {
+                filteredContents.append(content)
+                print("格納なり")
+            } else {
+                print("タイトルと違うのでスキップ")
+            }
+        }
+        createAnnotations(filterInfo: filteredContents)
     }
 //  SacredPlacesからannotationを作成する
     func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
