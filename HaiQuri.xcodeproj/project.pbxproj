@@ -18,6 +18,10 @@
 		3B20BB6D2B9ABB0500A720EA /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB6C2B9ABB0500A720EA /* ColorExtension.swift */; };
 		3B20BB6F2B9AC4B800A720EA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB6E2B9AC4B800A720EA /* WebView.swift */; };
 		3B20BB712B9AC7C900A720EA /* Halfmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20BB702B9AC7C900A720EA /* Halfmodal.swift */; };
+		3B72599F2B9C12820089814E /* HaiQuri.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B72599D2B9C12820089814E /* HaiQuri.xcdatamodeld */; };
+		3B7259A22B9C12F80089814E /* Entity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7259A02B9C12F80089814E /* Entity+CoreDataClass.swift */; };
+		3B7259A32B9C12F80089814E /* Entity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7259A12B9C12F80089814E /* Entity+CoreDataProperties.swift */; };
+		3B7259A52B9C13140089814E /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7259A42B9C13140089814E /* Persistance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		3B20BB6C2B9ABB0500A720EA /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		3B20BB6E2B9AC4B800A720EA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		3B20BB702B9AC7C900A720EA /* Halfmodal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Halfmodal.swift; sourceTree = "<group>"; };
+		3B72599E2B9C12820089814E /* HaiQuri.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HaiQuri.xcdatamodel; sourceTree = "<group>"; };
+		3B7259A02B9C12F80089814E /* Entity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3B7259A12B9C12F80089814E /* Entity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3B7259A42B9C13140089814E /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,10 @@
 		3B20BB4E2B9A9CDD00A720EA = {
 			isa = PBXGroup;
 			children = (
+				3B7259A02B9C12F80089814E /* Entity+CoreDataClass.swift */,
+				3B7259A12B9C12F80089814E /* Entity+CoreDataProperties.swift */,
+				3B7259A42B9C13140089814E /* Persistance.swift */,
+				3B72599D2B9C12820089814E /* HaiQuri.xcdatamodeld */,
 				3B20BB592B9A9CDD00A720EA /* HaiQuri */,
 				3B20BB582B9A9CDD00A720EA /* Products */,
 			);
@@ -166,8 +178,12 @@
 				08F6F25B2B9C6C1700BC9AB2 /* SearchBar.swift in Sources */,
 				3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */,
 				08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */,
+				3B7259A32B9C12F80089814E /* Entity+CoreDataProperties.swift in Sources */,
+				3B72599F2B9C12820089814E /* HaiQuri.xcdatamodeld in Sources */,
+				3B7259A52B9C13140089814E /* Persistance.swift in Sources */,
 				3B20BB712B9AC7C900A720EA /* Halfmodal.swift in Sources */,
 				3B20BB5B2B9A9CDD00A720EA /* HaiQuriApp.swift in Sources */,
+				3B7259A22B9C12F80089814E /* Entity+CoreDataClass.swift in Sources */,
 				3B20BB6D2B9ABB0500A720EA /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +396,18 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+/* Begin XCVersionGroup section */
+		3B72599D2B9C12820089814E /* HaiQuri.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3B72599E2B9C12820089814E /* HaiQuri.xcdatamodel */,
+			);
+			currentVersion = 3B72599E2B9C12820089814E /* HaiQuri.xcdatamodel */;
+			path = HaiQuri.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3B20BB4F2B9A9CDD00A720EA /* Project object */;
 }
