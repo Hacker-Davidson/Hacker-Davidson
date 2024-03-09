@@ -11,6 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {  // --- 1
+                HalfsheetView(isFavorited: false)
                 FloatButton()
 ///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
                 RouteFinishButton()
