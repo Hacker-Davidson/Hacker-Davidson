@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var logic = Logic()
+    @State private var title: String = ""
     var body: some View {
         NavigationView {
             ZStack {  // --- 1
-                HalfsheetView(isFavorited: false)
+
+                MapView(logics: logic)
+                SearchBar(logic: logic)
                 FloatButton()
-///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
+                ///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
                 RouteFinishButton()
+                
             }
             .toolbar {
                 customToolbarItems
@@ -95,12 +100,12 @@ extension ContentView {
                     Image(systemName: "list.bullet")
                 }
             }
-
+            
         }
     }
-
+    
 }
 
-    #Preview {
-        ContentView()
-    }
+#Preview {
+    ContentView()
+}

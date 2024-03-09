@@ -23,8 +23,11 @@ class Logic: ObservableObject {
     @Published var animeSubTitle: String = ""
     @Published var convertedCSVtoSacredPlaces: [sacredPlace] = []
     @Published var annotations: [MKPointAnnotation] = []
+    @Published var filteredContents: [sacredPlace] = []
+    @Published var deleteAnnotations: [MKPointAnnotation] = []
+    
     var csvContents: [String] = []
-// csvからデータを読み込んで配列に追加するメソッド
+    // csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
         guard let path = Bundle.main.path(forResource: "seichi", ofType: "csv") else {
             print("データソースがありませんぴえん")
@@ -38,7 +41,7 @@ class Logic: ObservableObject {
             print("なにかしらエラー")
         }
     }
-// readCSVをした後文字列の配列だったものをsacredPlace構造体に適応させ、それをconvertedCSVtoSacredPlacesに格納するメソッド
+    // readCSVをした後文字列の配列だったものをsacredPlace構造体に適応させ、それをconvertedCSVtoSacredPlacesに格納するメソッド
     func convertCSVtoSacredPlace() {
         for index in 0..<csvContents.count {
             if csvContents[index] == "" {
@@ -62,22 +65,41 @@ class Logic: ObservableObject {
                 convertedCSVtoSacredPlaces.append(sacredPlaceDetail)
             }
         }
+        
     }
-// 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
+    // 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
     func serchPlacesUsingAnimeTitle(title: String) {
-        let filteredConvertedCSVSacredPlace: [sacredPlace] = convertedCSVtoSacredPlaces.filter({$0.title.contains(title)})
-        createAnnotations(convertedCSVtoSacredPlaces: filteredConvertedCSVSacredPlace)
+        annotations.removeAll()
+        convertedCSVtoSacredPlaces.removeAll()
+        filteredContents.removeAll()
+        
+        readCSV()
+        convertCSVtoSacredPlace()
+        
+        for content in convertedCSVtoSacredPlaces {
+            if  content.title == title {
+                filteredContents.append(content)
+                print("格納なり")
+            } else {
+                print("タイトルと違うのでスキップ")
+            }
+        }
+        createAnnotations(filterInfo: filteredContents)
     }
-//  SacredPlacesからannotationを作成する
-    func createAnnotations(convertedCSVtoSacredPlaces: [sacredPlace]) {
-        for annotationOrigin in convertedCSVtoSacredPlaces {
+    
+    //  SacredPlacesからannotationを作成する
+    func createAnnotations(filterInfo: [sacredPlace]) {
+        annotations.removeAll()
+        for annotationOrigin in filterInfo {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: annotationOrigin.latitude, longitude: annotationOrigin.longitude)
             annotation.title = annotationOrigin.title
             annotation.subtitle = annotationOrigin.placeName
             annotations.append(annotation)
         }
+        
     }
+    
     func startCreatePin() {
         DispatchQueue.main.async {
             self.readCSV()
