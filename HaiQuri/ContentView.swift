@@ -15,12 +15,16 @@ struct ContentView: View {
         NavigationView {
             TabView(selection: $selection) {
                 ZStack {
+                    Color("TopBarColor")
+                        .edgesIgnoringSafeArea(.top) // Safe Areaを無視
                     MapView(logics: logic)
+                        .frame(maxWidth: .infinity, maxHeight: 640)
+                        .offset(x: 0, y: 40)
                     SearchBar(logic: logic)
                         .offset(x: 0, y: -300)
                 }  //
                 .tabItem {
-                    Label("Page1", systemImage: "1.circle")
+                    Label("Map", systemImage: "map")
                 }
                 .tag(1)
                 ChatView()   // Viewファイル②
@@ -31,7 +35,7 @@ struct ContentView: View {
             } // TabView ここまで
         }
         //戻るボタン色変更
-        .accentColor(Color.red)
+        .accentColor(Color.white)
     }
 }
 
@@ -52,7 +56,7 @@ struct FloatButton: View {
             .font(.system(size: 18))
         }
         .frame(width: 110, height: 60)
-        .background(Color.customButtonColor)
+        .background(Color.gray)
         .cornerRadius(30.0)
         .shadow(color: .gray, radius: 3, x: 3, y: 3)
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0)) // --- 5

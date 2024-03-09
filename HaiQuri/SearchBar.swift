@@ -18,7 +18,7 @@ struct SearchBar: View {
                 .padding(.horizontal, 10)
                 .background(.white)
                 .cornerRadius(15)
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 28) // またはここを調整
                 .foregroundColor(.black)
                 .overlay {
                     if !inputText.isEmpty {
@@ -37,9 +37,7 @@ struct SearchBar: View {
                     Text("検索")
                 })
             }
-
-
-
+            .offset(x: -20, y: -20)
     }
 }
 
