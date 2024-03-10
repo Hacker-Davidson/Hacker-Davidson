@@ -41,19 +41,6 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: 660)
                         .offset(x: 0, y: 0)
 
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 10) {
-                                ForEach(0..<animeTitleList.count){ index in
-                                    Button {
-                                        inputText = animeTitleList[index]
-                                    } label: {
-                                        Text(animeTitleList[index])
-                                            .foregroundStyle(.black)
-                                            .fontWeight(.bold)
-                                            .padding(.horizontal, 20)
-                                            .padding(.vertical, 12)
-                                            .background(.white)
-                                            .cornerRadius(25)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(0..<animeTitleList.count){ index in
