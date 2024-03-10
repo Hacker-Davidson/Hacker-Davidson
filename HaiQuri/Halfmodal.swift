@@ -8,6 +8,7 @@ struct HalfSheetDetails: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Entity.latitude, ascending: true)],
         animation: .default)
     private var entityList: FetchedResults<Entity>
+
     //追加
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var show: Bool
@@ -41,11 +42,12 @@ struct HalfSheetDetails: View {
                 .foregroundColor(.primary)
             Spacer()
             Button(action: {
-                print("Toggle Like")
-                addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id, placeName: placeName)
+                //                データ保存ロジック
+
+                checkIfAlreadyFavorited(placeaName: placeName) ? deleteLiked(placeName: placeName): addLike(id: id, title: title, placeName: placeName, adress: adress, latitude: latitude, longitude: longitude)
             }) {
-                Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
-                    .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray)
+                Image(systemName: checkIfAlreadyFavorited(placeaName: placeName) ? "heart.fill" : "heart")
+                    .foregroundColor(checkIfAlreadyFavorited(placeaName: placeName) ? .red : .gray)
                     .font(.system(size: 25))
             }
             Spacer()
