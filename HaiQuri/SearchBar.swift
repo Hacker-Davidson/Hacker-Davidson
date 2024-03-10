@@ -19,7 +19,7 @@ struct SearchBar: View {
             .padding(.horizontal, 10)
             .background(.white)
             .cornerRadius(15)
-            .padding(.horizontal, -10) // またはここを調整
+            .padding(.horizontal, -20) // またはここを調整
             .foregroundColor(.black)
             .offset(x: -20, y: 0)
             .overlay {
@@ -38,10 +38,15 @@ struct SearchBar: View {
             Button(action: {
                 logic.serchPlacesUsingAnimeTitle(title: inputText)
             }, label: {
-                Text("検索")
-                })
-            }
-            .offset(x: -20, y: -20)
+                HStack {
+                    Spacer()
+                    Image(systemName: "magnifyingglass.circle.fill")
+                    Text("検索")
+                        .padding(.trailing, -15)
+                }
+            })
+        }
+        .offset(x: -10, y: -20)
     }
 }
 
