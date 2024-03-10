@@ -5,9 +5,6 @@
 //  Created by 澤木柊斗 on 2024/03/08.
 //
 
-
-
-
 import SwiftUI
 import UIKit
 import MapKit
@@ -16,7 +13,6 @@ import CoreLocation
 struct MapView: UIViewRepresentable {
     @ObservedObject var logics: Logic
     @State  var isShowSheet: Bool = false
-    @Binding var isTapped: Bool
     func makeUIView(context: Context) -> MKMapView {
         @State var deleteAnnotations = logics.deleteAnnotations
         let mapView = MKMapView()
@@ -46,7 +42,6 @@ struct MapView: UIViewRepresentable {
 
         return mapView
     }
-
     func updateUIView(_ mapView: MKMapView, context: Context) {
         print(logics.annotations)
         mapView.removeAnnotations(mapView.annotations)
@@ -54,43 +49,23 @@ struct MapView: UIViewRepresentable {
             mapView.addAnnotation(annotation)
         }
         mapView.setCenter(logics.coodinater, animated: true)
-        createRoot(mapView, isTapped: isTapped)
-
     }
-
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+}
 
-    func createRoot(_ mapView: MKMapView, isTapped: Bool) {
-        if isTapped {
-            mapView.removeOverlays(mapView.overlays)
-            let sourcePlaceMark = MKPlacemark(coordinate: mapView.userLocation.coordinate)
-            let distinationPlaceMark = MKPlacemark(coordinate: logics.coodinater)
-            let directionRequest = MKDirections.Request()
-            directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
-            directionRequest.destination = MKMapItem(placemark: distinationPlaceMark)
-            directionRequest.transportType = .automobile
-            let directions = MKDirections(request: directionRequest)
-            directions.calculate { (response, error) in
-                guard let directionResonse = response else {
-                    if let error = error {
-                        print("we have error getting directions==\(error.localizedDescription)")
-                    }
-                    return
-                }
-                let route = directionResonse.routes[0]
-                mapView.addOverlay(route.polyline, level: .aboveRoads)
+class CustomMKMapView: MKMapView, MKMapViewDelegate {
+    var logics: Logic
 
-                let rect = route.polyline.boundingMapRect
-                mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+    init(frame: CGRect, logics: Logic) {
+        self.logics = logics
+        super.init(frame: frame)
+        self.delegate = self
+    }
 
-            }
-            self.isTapped = false
-        } else {
-            self.isTapped = false
-            return
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -99,7 +74,6 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     var parent: MapView
     var logics: Logic
     var locationManager = CLLocationManager()
-    var mapView: MKMapView?
 
     init(_ parent: MapView) {
         self.parent = parent
@@ -124,9 +98,7 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
             break
         }
     }
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-
         if let annotation = view.annotation as? Logic.customMKAnnotation {
             logics.coodinater = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             logics.modalInfo = sacredPlace(
@@ -142,17 +114,6 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         } else {
             print("取得")
         }
-    }
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.blue
-        renderer.lineWidth = 4.0
-        return renderer
-    }
-}
-extension Coordinator {
-    func getMapView() -> MKMapView {
-        return self.mapView!
     }
 }
 

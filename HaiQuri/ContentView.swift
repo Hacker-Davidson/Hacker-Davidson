@@ -6,44 +6,31 @@
 //
 
 import SwiftUI
-import MapKit
 
 struct ContentView: View {
     @State var selection = 1// タブの選択項目を保持する
     @StateObject var logic = Logic()
     @State private var title: String = ""
-    @State private var mapView: MKMapView?
-    @State private var isTapped: Bool = false
     var body: some View {
         NavigationView {
             TabView(selection: $selection) {
                 ZStack {
                     Color("TopBarColor")
                         .edgesIgnoringSafeArea(.all) // Safe Areaを無視
-                    MapView(logics: logic, isTapped: $isTapped)
-                             .sheet(isPresented: $logic.isShowSheet) {
-                        // before → HalfSheetDetails(show: $isShowSheet)
-                        HalfSheetDetails(
-                            show: $logic.isShowSheet,
-                            id: logic.modalInfo.id ,
-                            title: logic.modalInfo.title ?? "",
-                            latitude: logic.modalInfo.latitude,
-                            longitude: logic.modalInfo.longitude,
-                            adress: logic.modalInfo.adress,
-                            placeName: logic.modalInfo.placeName ?? "", logics: logic
-                        ) // ← after
-
-                                 Button(action: {
-                                     isTapped = true
-                                     if isTapped {
-                                         logic.isShowSheet = false
-                                     }
-
-                                 }, label: {
-                                     Text("経路")
-                                 })
-                            .presentationDetents([.medium])
-                    }
+                    MapView(logics: logic)
+                        .sheet(isPresented: $logic.isShowSheet) {
+                            // before → HalfSheetDetails(show: $isShowSheet)
+                            HalfSheetDetails(
+                                show: $logic.isShowSheet,
+                                id: logic.modalInfo.id ,
+                                title: logic.modalInfo.title ?? "",
+                                latitude: logic.modalInfo.latitude,
+                                longitude: logic.modalInfo.longitude,
+                                adress: logic.modalInfo.adress,
+                                placeName: logic.modalInfo.placeName ?? ""
+                            ) // ← after
+                            .presentationDetents([.half])
+                        }
                         .frame(maxWidth: .infinity, maxHeight: 660)
                         .offset(x: 0, y: 0)
                 }  //
@@ -99,12 +86,14 @@ struct FloatButton: View {
 struct RouteFinishButton: View {
     var body: some View {
         HStack { // --- 2
+            NavigationLink(destination: ContentView()) {
                 HStack {
                     Spacer()
                     Image(systemName: "xmark.app")
                     Text("終了")
                     Spacer()
                 }
+            }
             .foregroundColor(.white)
             .font(.system(size: 18))
         }
@@ -115,4 +104,13 @@ struct RouteFinishButton: View {
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0)) // --- 5
         .offset(x: -125, y: -240)
     }
+}
+
+#Preview {
+    ContentView()
+}
+
+// シート幅のカスタム指定をextensionで管理
+extension PresentationDetent {
+    static let half = Self.fraction(0.43)
 }

@@ -29,6 +29,7 @@ class Logic: ObservableObject {
     @Published var modalInfo: sacredPlace = sacredPlace(id: "", title: "", placeName: "", adress: "", latitude: 0.0, longitude: 0.0, isFavorite: false)
     @Published var coodinater: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     @Published var isShowSheet: Bool = false
+
     var csvContents: [String] = []
     // csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
