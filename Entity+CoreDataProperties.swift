@@ -23,3 +23,10 @@ extension Entity {
     @NSManaged public var isFavorite: Bool
 
 }
+
+
+
+
+
+
+
