@@ -12,9 +12,9 @@ import CoreLocation
 
 struct MapView: UIViewRepresentable {
     @ObservedObject var logics: Logic
-    @State  var isShowSheet: Bool = false
+    @State var isShowSheet: Bool = false
+    @Binding var isTapped: Bool
     func makeUIView(context: Context) -> MKMapView {
-        @State var deleteAnnotations = logics.deleteAnnotations
         let mapView = MKMapView()
         let coordinator = context.coordinator
         let topPadding: CGFloat = 0
@@ -42,6 +42,7 @@ struct MapView: UIViewRepresentable {
 
         return mapView
     }
+
     func updateUIView(_ mapView: MKMapView, context: Context) {
         print(logics.annotations)
         mapView.removeAnnotations(mapView.annotations)
@@ -49,11 +50,41 @@ struct MapView: UIViewRepresentable {
             mapView.addAnnotation(annotation)
         }
         mapView.setCenter(logics.coodinater, animated: true)
+        if isTapped {
+            createRoot(mapView, isTapped: isTapped)
+        }
     }
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
+
+    func createRoot(_ mapView: MKMapView, isTapped: Bool) {
+        mapView.removeOverlays(mapView.overlays)
+        let sourcePlaceMark = MKPlacemark(coordinate: mapView.userLocation.coordinate)
+        let distinationPlaceMark = MKPlacemark(coordinate: logics.coodinater)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
+        directionRequest.destination = MKMapItem(placemark: distinationPlaceMark)
+        directionRequest.transportType = .automobile
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { (response, error) in
+            guard let directionResonse = response else {
+                if let error = error {
+                    print("we have error getting directions==\(error.localizedDescription)")
+                }
+                return
+            }
+            let route = directionResonse.routes[0]
+            mapView.addOverlay(route.polyline, level: .aboveRoads)
+            let rect = route.polyline.boundingMapRect
+            mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+
+        }
+        self.isTapped = false
+    }
 }
+
 
 class CustomMKMapView: MKMapView, MKMapViewDelegate {
     var logics: Logic
@@ -82,6 +113,9 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
     }
+
+
+
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -114,6 +148,12 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         } else {
             print("取得")
         }
+    }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 4.0
+        return renderer
     }
 }
 

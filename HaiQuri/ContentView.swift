@@ -6,33 +6,39 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
     @State var selection = 1// タブの選択項目を保持する
     @StateObject var logic = Logic()
     @State private var title: String = ""
+    @State private var mapView: MKMapView?
+    @State private var isTapped: Bool = false
+    @State private var isDelegate: Bool = false
+
     var body: some View {
         NavigationView {
             TabView(selection: $selection) {
                 ZStack {
                     Color("TopBarColor")
                         .edgesIgnoringSafeArea(.all) // Safe Areaを無視
-                    MapView(logics: logic)
+                    MapView(logics: logic, isTapped: $isTapped)
                         .sheet(isPresented: $logic.isShowSheet) {
                             // before → HalfSheetDetails(show: $isShowSheet)
                             HalfSheetDetails(
                                 show: $logic.isShowSheet,
                                 id: logic.modalInfo.id ,
-                                title: logic.modalInfo.title ?? "",
+                                title: logic.modalInfo.title ,
                                 latitude: logic.modalInfo.latitude,
                                 longitude: logic.modalInfo.longitude,
                                 adress: logic.modalInfo.adress,
-                                placeName: logic.modalInfo.placeName ?? ""
-                            ) // ← after
+                                placeName: logic.modalInfo.placeName, isDelegate: $isTapped, logic: logic
+                            )
                             .presentationDetents([.half])
                         }
                         .frame(maxWidth: .infinity, maxHeight: 660)
                         .offset(x: 0, y: 0)
+
                 }  //
                 .tabItem {
                     Label("Map", systemImage: "map")
@@ -45,11 +51,11 @@ struct ContentView: View {
                     .tag(2)
             } // TabView ここまで
             .navigationBarItems(trailing: Button(action: {
-                       // アクション
-                   }) {
-                       SearchBar(logic: logic)
-                           .offset(x: 0, y: 17)
-                   })
+                // アクション
+            }) {
+                SearchBar(logic: logic)
+                    .offset(x: 0, y: 17)
+            })
         }
         //戻るボタン色変更
         .accentColor(Color.white)
@@ -83,32 +89,9 @@ struct FloatButton: View {
 
 ///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
 //経路案内終了ボタン
-struct RouteFinishButton: View {
-    var body: some View {
-        HStack { // --- 2
-            NavigationLink(destination: ContentView()) {
-                HStack {
-                    Spacer()
-                    Image(systemName: "xmark.app")
-                    Text("終了")
-                    Spacer()
-                }
-            }
-            .foregroundColor(.white)
-            .font(.system(size: 18))
-        }
-        .frame(width: 110, height: 60)
-        .background(.blue)
-        .cornerRadius(30.0)
-        .shadow(color: .gray, radius: 3, x: 3, y: 3)
-        .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0)) // --- 5
-        .offset(x: -125, y: -240)
-    }
-}
 
-#Preview {
-    ContentView()
-}
+
+
 
 // シート幅のカスタム指定をextensionで管理
 extension PresentationDetent {

@@ -1,7 +1,6 @@
 import SwiftUI
+import MapKit
 import CoreData
-
-
 
 struct HalfSheetDetails: View {
     //マップ情報取得
@@ -11,15 +10,15 @@ struct HalfSheetDetails: View {
     private var entityList: FetchedResults<Entity>
     //追加
     @Environment(\.managedObjectContext) private var viewContext
-    //
     @Binding var show: Bool
-    // before → @State private var id: String = ""
-    @State var id: String // ← after
+    @State var id: String
     @State var title: String
     @State var latitude: Double
     @State var longitude: Double
     @State var adress: String
     @State var placeName: String
+    @Binding var isDelegate: Bool
+    var logic: Logic
 
     var body: some View {
         VStack {
@@ -54,7 +53,6 @@ struct HalfSheetDetails: View {
         .padding(.top, 30)
     }
 
-
     private var detailSection: some View {
         VStack(spacing: 40) {
             Spacer()
@@ -85,6 +83,7 @@ struct HalfSheetDetails: View {
     private var routeButton: some View {
         Button(action: {
             print("経路案内")
+            isDelegate = true
         }) {
             HStack {
                 Image(systemName: "location.fill")
