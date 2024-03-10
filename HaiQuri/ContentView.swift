@@ -54,13 +54,26 @@ struct ContentView: View {
                                             .padding(.vertical, 12)
                                             .background(.white)
                                             .cornerRadius(25)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(0..<animeTitleList.count){ index in
+                                Button {
+                                    inputText = animeTitleList[index]
+                                } label: {
+                                    Text(animeTitleList[index])
+                                        .foregroundStyle(.black)
+                                        .fontWeight(.bold)
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 12)
+                                        .background(.white)
+                                        .cornerRadius(25)
 
                                 }
                             }
-                                .shadow(radius: 10)
+                            .shadow(radius: 10)
                         }
                     }
-                        .padding(.bottom, 550)
+                    .padding(.bottom, 550)
 
                 }  //
                 .tabItem {
