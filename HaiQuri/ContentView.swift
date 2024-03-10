@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var mapView: MKMapView?
     @State private var isTapped: Bool = false
     @State private var isDelegate: Bool = false
+    @State var inputText: String = ""
+    let animeTitleList: [String] = ["けいおん", "涼宮ハルヒの憂鬱", "ちはやふる", "東京喰種", "四月は君の嘘", "けものフレンズ", "月がきれい", "聲の形"]
 
     var body: some View {
         NavigationView {
@@ -74,7 +76,7 @@ struct ContentView: View {
             .navigationBarItems(trailing: Button(action: {
                 // アクション
             }) {
-                SearchBar(logic: logic)
+                SearchBar(inputText: $inputText, title: $title, logic: logic)
                     .offset(x: 0, y: 17)
             })
         }

@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct SearchBar: View {
-    @State private var inputText = ""
+    @Binding  var inputText: String
+    @Binding var title: String
     let logic: Logic
     var body: some View {
         HStack {
-            TextField("", text: $inputText, prompt: Text("けいおん!")
+            TextField("", text: $inputText, prompt: Text("けいおん")
                 .foregroundColor(.gray))
             .frame(width: 270)
             .padding(.vertical, 10)
