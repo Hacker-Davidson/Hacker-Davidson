@@ -48,8 +48,7 @@ struct MapView: UIViewRepresentable {
         for annotation in logics.annotations {
             mapView.addAnnotation(annotation)
         }
-        let coordinate: CLLocationCoordinate2D  = CLLocationCoordinate2D(latitude: logics.filteredContents.first?.latitude as? Double ?? 0.0, longitude: logics.filteredContents.first?.longitude as? Double ?? 0.0)
-        mapView.setCenter(coordinate, animated: true)
+        mapView.setCenter(logics.coodinater, animated: true)
     }
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -101,6 +100,7 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let annotation = view.annotation as? Logic.customMKAnnotation {
+            logics.coodinater = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             logics.modalInfo = sacredPlace(
                 id: annotation.id,
                 title: annotation.title ?? "",
