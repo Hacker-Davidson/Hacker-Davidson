@@ -27,11 +27,7 @@ struct WebView: UIViewRepresentable {
 //じゅんちゃんの前作ったやつ(テスト用)
 struct ChatView: View {
     var body: some View {
-        ZStack {
-            WebView()
-            Color("TopBarColor")
-                .edgesIgnoringSafeArea(.all) // Safe Areaを無視
-        }
-//            .edgesIgnoringSafeArea(.all) // オプション: セーフエリアを無視して全画面で表示
+        WebView()
+            .edgesIgnoringSafeArea(.all) // オプション: セーフエリアを無視して全画面で表示
     }
 }
