@@ -114,24 +114,6 @@ struct HalfSheetDetails: View {
         try? viewContext.save()
         print("")
     }
-    func confirmLikeList(id: String) {
-        for entity in entityList {
-            if entity.mapID == id {
-                self.id = entity.mapID ?? ""
-                title = entity.title ?? ""
-                latitude = entity.latitude
-                longitude = entity.logitude
-                placeName = entity.placeName ?? ""
-                adress =  entity.adress ?? ""
-                print(self.id)
-                print(self.title)
-                print(self.latitude)
-                print(self.adress)
-                print(self.placeName)
-
-
-            } else {
-                print("残念でした")
     func checkIfAlreadyFavorited(placeaName: String) -> Bool {
         for index in 0..<entityList.count {
             if placeaName == entityList[index].placeName {
