@@ -100,8 +100,6 @@ struct HalfSheetDetails: View {
         }
         .padding(.top, 50)
     }
-
-
     func addLike(id: String, title: String, placeName: String, adress: String, latitude: Double, longitude: Double) {
         let context = Entity(context: viewContext)
         context.mapID = id
@@ -126,11 +124,17 @@ struct HalfSheetDetails: View {
         return false
     }
 
+    func deleteLiked(placeName: String){
+        let context = Entity(context: viewContext)
+        for entity in entityList {
+            if entity.placeName == placeName {
+                viewContext.delete(entity)
+            }
+            try? viewContext.save()
         }
-        return false
-        // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
-    }
 
+    }
+    // お気に入りがすでに登録されているか確認する関数
 }
 
 
