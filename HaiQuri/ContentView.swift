@@ -16,12 +16,10 @@ struct ContentView: View {
             TabView(selection: $selection) {
                 ZStack {
                     Color("TopBarColor")
-                        .edgesIgnoringSafeArea(.top) // Safe Areaを無視
+                        .edgesIgnoringSafeArea(.all) // Safe Areaを無視
                     MapView(logics: logic)
-                        .frame(maxWidth: .infinity, maxHeight: 640)
-                        .offset(x: 0, y: 40)
-                    SearchBar(logic: logic)
-                        .offset(x: 0, y: -300)
+                        .frame(maxWidth: .infinity, maxHeight: 660)
+                        .offset(x: 0, y: 0)
                 }  //
                 .tabItem {
                     Label("Map", systemImage: "map")
@@ -33,6 +31,12 @@ struct ContentView: View {
                     }
                     .tag(2)
             } // TabView ここまで
+            .navigationBarItems(trailing: Button(action: {
+                       // アクション
+                   }) {
+                       SearchBar(logic: logic)
+                           .offset(x: 0, y: 17)
+                   })
         }
         //戻るボタン色変更
         .accentColor(Color.white)
