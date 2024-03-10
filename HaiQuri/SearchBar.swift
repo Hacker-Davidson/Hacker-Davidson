@@ -28,6 +28,7 @@ struct SearchBar: View {
                         .foregroundStyle(.gray)
                         .scaleEffect(1.4)
                         .padding(.leading, 300)
+                        .offset(x: -50, y: 0)
                         .onTapGesture {
                                 inputText = ""
                             }
