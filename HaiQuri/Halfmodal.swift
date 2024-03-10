@@ -84,6 +84,7 @@ struct HalfSheetDetails: View {
         Button(action: {
             print("経路案内")
             isTapped = true
+            show = false
         }) {
             HStack {
                 Image(systemName: "location.fill")

@@ -12,7 +12,7 @@ import CoreLocation
 
 struct MapView: UIViewRepresentable {
     @ObservedObject var logics: Logic
-    @State var isShowSheet: Bool = false
+//    @State var isShowSheet: Bool
     @Binding var isTapped: Bool
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
