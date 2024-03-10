@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		086F33EB2B9E23E300D9D7DA /* LikeListview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086F33EA2B9E23E300D9D7DA /* LikeListview.swift */; };
 		08A1ED582B9AA49E005E1AAD /* seichi.csv in Resources */ = {isa = PBXBuildFile; fileRef = 08A1ED572B9AA49E005E1AAD /* seichi.csv */; };
 		08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A1ED592B9AA559005E1AAD /* Logic.swift */; };
 		08F6F25B2B9C6C1700BC9AB2 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		086F33EA2B9E23E300D9D7DA /* LikeListview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListview.swift; sourceTree = "<group>"; };
 		08A1ED572B9AA49E005E1AAD /* seichi.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seichi.csv; sourceTree = "<group>"; };
 		08A1ED592B9AA559005E1AAD /* Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic.swift; sourceTree = "<group>"; };
 		08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */,
 				08A1ED592B9AA559005E1AAD /* Logic.swift */,
 				3BCA86F12B9D5A1B0090BD53 /* UIApplication+ext.swift */,
+				086F33EA2B9E23E300D9D7DA /* LikeListview.swift */,
 				08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */,
 				08A1ED572B9AA49E005E1AAD /* seichi.csv */,
 				3B20BB6E2B9AC4B800A720EA /* WebView.swift */,
@@ -179,6 +182,7 @@
 				3B20BB6F2B9AC4B800A720EA /* WebView.swift in Sources */,
 				08F6F25D2B9C6CE300BC9AB2 /* MapView.swift in Sources */,
 				08F6F25B2B9C6C1700BC9AB2 /* SearchBar.swift in Sources */,
+				086F33EB2B9E23E300D9D7DA /* LikeListview.swift in Sources */,
 				3B20BB5D2B9A9CDD00A720EA /* ContentView.swift in Sources */,
 				08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */,
 				3B7259A32B9C12F80089814E /* Entity+CoreDataProperties.swift in Sources */,
