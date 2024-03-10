@@ -102,18 +102,17 @@ struct HalfSheetDetails: View {
     }
 
 
-
-    func addLike (title: String, latitude: Double, longitude: Double, adress: String, mapID: String, placeName: String){
-        let entity = Entity(context: viewContext)
-        entity.title = title
-        entity.latitude = latitude
-        entity.logitude = longitude
-        entity.adress = adress
-        entity.mapID = mapID
-        entity.placeName = placeName
-        entity.isFavorite = true
+    func addLike(id: String, title: String, placeName: String, adress: String, latitude: Double, longitude: Double) {
+        let context = Entity(context: viewContext)
+        context.mapID = id
+        context.title = title
+        context.placeName = placeName
+        context.adress = adress
+        context.isFavorite = true
+        context.latitude = latitude
+        context.logitude = longitude
         try? viewContext.save()
-        print("いいね機能🐈")
+        print("")
     }
     func confirmLikeList(id: String) {
         for entity in entityList {
@@ -133,17 +132,18 @@ struct HalfSheetDetails: View {
 
             } else {
                 print("残念でした")
+    func checkIfAlreadyFavorited(placeaName: String) -> Bool {
+        for index in 0..<entityList.count {
+            if placeaName == entityList[index].placeName {
+                print(entityList[index].placeName)
+                print(placeaName)
+                print("一致しました")
+                return true
             }
         }
+        return false
     }
 
-    // お気に入りがすでに登録されているか確認する関数
-
-
-    func checkIfAlreadyFavorited(id: String) -> Bool {
-        if let _ = entityList.first(where: { $0.mapID == id }) {
-            // id が一致するエンティティが見つかった場合
-            return true
         }
         return false
         // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
