@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
 struct MapView: UIViewRepresentable {
     @ObservedObject var logics: Logic
     @State  var isShowSheet: Bool = false

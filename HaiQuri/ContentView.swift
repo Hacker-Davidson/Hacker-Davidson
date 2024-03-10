@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var selection = 1// タブの選択項目を保持する
     @StateObject var logic = Logic()
     @State private var title: String = ""
     var body: some View {
         NavigationView {
-            ZStack {  // --- 1
-
-                MapView(logics: logic)
-                    .sheet(isPresented: $logic.isShowSheet) {
+            TabView(selection: $selection) {
+                ZStack {
+                    Color("TopBarColor")
+                        .edgesIgnoringSafeArea(.all) // Safe Areaを無視
+                    MapView(logics: logic)
+                             .sheet(isPresented: $logic.isShowSheet) {
                         // before → HalfSheetDetails(show: $isShowSheet)
                         HalfSheetDetails(
                             show: $logic.isShowSheet,
@@ -28,20 +31,28 @@ struct ContentView: View {
                         ) // ← after
                             .presentationDetents([.medium])
                     }
-
-                SearchBar(logic: logic)
-                FloatButton()
-                ///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
-                RouteFinishButton()
-                
-            }
-            .toolbar {
-                customToolbarItems
-            }
-            
+                        .frame(maxWidth: .infinity, maxHeight: 660)
+                        .offset(x: 0, y: 0)
+                }  //
+                .tabItem {
+                    Label("Map", systemImage: "map")
+                }
+                .tag(1)
+                ChatView()   // Viewファイル②
+                    .tabItem {
+                        FloatButton()
+                    }
+                    .tag(2)
+            } // TabView ここまで
+            .navigationBarItems(trailing: Button(action: {
+                       // アクション
+                   }) {
+                       SearchBar(logic: logic)
+                           .offset(x: 0, y: 17)
+                   })
         }
         //戻るボタン色変更
-        .accentColor(Color.red)
+        .accentColor(Color.white)
     }
 }
 
@@ -62,7 +73,7 @@ struct FloatButton: View {
             .font(.system(size: 18))
         }
         .frame(width: 110, height: 60)
-        .background(Color.customButtonColor)
+        .background(Color.gray)
         .cornerRadius(30.0)
         .shadow(color: .gray, radius: 3, x: 3, y: 3)
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0)) // --- 5
@@ -70,6 +81,7 @@ struct FloatButton: View {
     }
 }
 
+///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい
 //経路案内終了ボタン
 struct RouteFinishButton: View {
     var body: some View {
@@ -92,32 +104,6 @@ struct RouteFinishButton: View {
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 16.0, trailing: 16.0)) // --- 5
         .offset(x: -125, y: -240)
     }
-}
-
-//ToolBarカスタム
-extension ContentView {
-    var customToolbarItems: some ToolbarContent {
-        ToolbarItemGroup(placement: .navigationBarTrailing) {
-            HStack {
-                Text("aaaa           ")
-                    .foregroundColor(.white)
-                    .font(.system(size: 40))
-                    .padding(.bottom, 20)
-                Menu {
-                    Button("ユーザー集", action: {
-                        // 選択肢 1 のアクション
-                    })
-                    Button("ログアウト", action: {
-                        // 選択肢 2 のアクション
-                    })
-                } label: {
-                    Image(systemName: "list.bullet")
-                }
-            }
-            
-        }
-    }
-    
 }
 
 #Preview {

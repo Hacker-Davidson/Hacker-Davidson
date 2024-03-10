@@ -11,22 +11,24 @@ struct SearchBar: View {
     @State private var inputText = ""
     let logic: Logic
     var body: some View {
-            HStack {
-                TextField("", text: $inputText, prompt: Text("けいおん!")
-                    .foregroundColor(.gray))
-                .padding(.vertical, 10)
-                .padding(.horizontal, 10)
-                .background(.white)
-                .cornerRadius(15)
-                .padding(.horizontal, 10)
-                .foregroundColor(.black)
-                .overlay {
-                    if !inputText.isEmpty {
-                        Image(systemName: "xmark.circle")
-                            .foregroundStyle(.gray)
-                            .scaleEffect(1.4)
-                            .padding(.leading, 300)
-                            .onTapGesture {
+        HStack {
+            TextField("", text: $inputText, prompt: Text("けいおん!")
+                .foregroundColor(.gray))
+            .frame(width: 270)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 10)
+            .background(.white)
+            .cornerRadius(15)
+            .padding(.horizontal, -10) // またはここを調整
+            .foregroundColor(.black)
+            .offset(x: -20, y: 0)
+            .overlay {
+                if !inputText.isEmpty {
+                    Image(systemName: "xmark.circle")
+                        .foregroundStyle(.gray)
+                        .scaleEffect(1.4)
+                        .padding(.leading, 300)
+                        .onTapGesture {
                                 inputText = ""
                             }
                     }
@@ -37,9 +39,7 @@ struct SearchBar: View {
                     Text("検索")
                 })
             }
-
-
-
+            .offset(x: -20, y: -20)
     }
 }
 
