@@ -1,23 +1,7 @@
 import SwiftUI
 import CoreData
 
-struct HalfsheetView: View {
-    //追加
-    @State var isShowSheet = false
-    @State var adress = "愛知県名古屋市東区星崎町5453"
-    @State var title = "影の実力者になりたくて"
-    @State var latitude = 0.0
-    @State var longitude = 0.0
-    @State var id = "123457" // このidは保存ずみ
-    @State var placeName = "めっちゃすごい体育館"
 
-    var body: some View {
-        Button("シートを表示") {
-            isShowSheet.toggle()
-        }
-
-    }
-}
 
 struct HalfSheetDetails: View {
     //マップ情報取得
@@ -40,25 +24,25 @@ struct HalfSheetDetails: View {
     var body: some View {
         ZStack {
             Button{
-                           print("経路案内")
-                       }label: {
-                           NavigationLink(destination: ContentView()) {
-                               HStack {
-                                   Image(systemName: "location.fill")
-                                   Text("経路")
-                                       .font(.title)
-                               }
-                           }
-                           .frame(width: 130, height: 60)
-                           .foregroundColor(.white)
-                           .background(Color.customButtonColor)
-                           .cornerRadius(30.0)
-                           .shadow(radius: 3)
-                           .padding(.top, 150)
-                       }
-                       .frame(maxWidth: .infinity, maxHeight: .infinity)
-                       .background(Color.white)
-                       .offset(x: 0, y: 80)
+                print("経路案内")
+            }label: {
+                NavigationLink(destination: ContentView()) {
+                    HStack {
+                        Image(systemName: "location.fill")
+                        Text("経路")
+                            .font(.title)
+                    }
+                }
+                .frame(width: 130, height: 60)
+                .foregroundColor(.white)
+                .background(Color.customButtonColor)
+                .cornerRadius(30.0)
+                .shadow(radius: 3)
+                .padding(.top, 150)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+            .offset(x: 0, y: 80)
             VStack {
                 Spacer()
 
@@ -194,6 +178,3 @@ struct HalfSheetDetails: View {
 }
 
 
-#Preview ("ハーフモーダル"){
-    HalfsheetView()
-}

@@ -18,19 +18,19 @@ struct ContentView: View {
                     Color("TopBarColor")
                         .edgesIgnoringSafeArea(.all) // Safe Areaを無視
                     MapView(logics: logic)
-                             .sheet(isPresented: $logic.isShowSheet) {
-                        // before → HalfSheetDetails(show: $isShowSheet)
-                        HalfSheetDetails(
-                            show: $logic.isShowSheet,
-                            id: logic.modalInfo.id ,
-                            title: logic.modalInfo.title ?? "",
-                            latitude: logic.modalInfo.latitude,
-                            longitude: logic.modalInfo.longitude,
-                            adress: logic.modalInfo.adress,
-                            placeName: logic.modalInfo.placeName ?? ""
-                        ) // ← after
-                            .presentationDetents([.medium])
-                    }
+                        .sheet(isPresented: $logic.isShowSheet) {
+                            // before → HalfSheetDetails(show: $isShowSheet)
+                            HalfSheetDetails(
+                                show: $logic.isShowSheet,
+                                id: logic.modalInfo.id ,
+                                title: logic.modalInfo.title ?? "",
+                                latitude: logic.modalInfo.latitude,
+                                longitude: logic.modalInfo.longitude,
+                                adress: logic.modalInfo.adress,
+                                placeName: logic.modalInfo.placeName ?? ""
+                            ) // ← after
+                            .presentationDetents([.half])
+                        }
                         .frame(maxWidth: .infinity, maxHeight: 660)
                         .offset(x: 0, y: 0)
                 }  //
@@ -108,4 +108,9 @@ struct RouteFinishButton: View {
 
 #Preview {
     ContentView()
+}
+
+// シート幅のカスタム指定をextensionで管理
+extension PresentationDetent {
+    static let half = Self.fraction(0.43)
 }
