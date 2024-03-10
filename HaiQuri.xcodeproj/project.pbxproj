@@ -78,8 +78,8 @@
 		3B20BB592B9A9CDD00A720EA /* HaiQuri */ = {
 			isa = PBXGroup;
 			children = (
-				08F6F25C2B9C6CE300BC9AB2 /* MapView.swift */,
 				3B20BB6B2B9AABD200A720EA /* Info.plist */,
+				08F6F25C2B9C6CE300BC9AB2 /* MapView.swift */,
 				3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */,
 				3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */,
 				08A1ED592B9AA559005E1AAD /* Logic.swift */,
@@ -396,6 +396,7 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
 /* Begin XCVersionGroup section */
 		3B72599D2B9C12820089814E /* HaiQuri.xcdatamodeld */ = {
 			isa = XCVersionGroup;

@@ -16,6 +16,7 @@ struct sacredPlace: Identifiable {
     let adress: String
     let latitude: Double
     let longitude: Double
+    let isFavorite: Bool
 }
 
 class Logic: ObservableObject {
@@ -25,7 +26,9 @@ class Logic: ObservableObject {
     @Published var annotations: [MKPointAnnotation] = []
     @Published var filteredContents: [sacredPlace] = []
     @Published var deleteAnnotations: [MKPointAnnotation] = []
-    
+    @Published var modalInfo: sacredPlace = sacredPlace(id: "", title: "", placeName: "", adress: "", latitude: 0.0, longitude: 0.0, isFavorite: false)
+    @Published var isShowSheet: Bool = false
+
     var csvContents: [String] = []
     // csvからデータを読み込んで配列に追加するメソッド
     func readCSV() {
@@ -51,7 +54,7 @@ class Logic: ObservableObject {
                 let id = csvContentConponent[0]
                 let title = csvContentConponent[1]
                 let placeName = csvContentConponent[3]
-                let adress = csvContentConponent[4]
+                let adress = csvContentConponent[5]
                 let latitude = csvContentConponent[6].doubleValue() ?? 0.00
                 let longitude = csvContentConponent[7].doubleValue() ?? 0.00
                 let sacredPlaceDetail = sacredPlace(
@@ -59,23 +62,30 @@ class Logic: ObservableObject {
                     title: title,
                     placeName: placeName,
                     adress: adress,
+             
                     latitude: latitude,
-                    longitude: longitude
+                    longitude: longitude,
+                    isFavorite: false
                 )
                 convertedCSVtoSacredPlaces.append(sacredPlaceDetail)
             }
         }
-        
+
+    }
+    class customMKAnnotation: MKPointAnnotation {
+        var adress: String = ""
+        var isFavorite: Bool = false
+        var id: String = ""
     }
     // 検索バーを使ってconvertedCSVtoSacredPlaceをフィルタリングして好きなアニメ
     func serchPlacesUsingAnimeTitle(title: String) {
         annotations.removeAll()
         convertedCSVtoSacredPlaces.removeAll()
         filteredContents.removeAll()
-        
+
         readCSV()
         convertCSVtoSacredPlace()
-        
+
         for content in convertedCSVtoSacredPlaces {
             if  content.title == title {
                 filteredContents.append(content)
@@ -86,18 +96,25 @@ class Logic: ObservableObject {
         }
         createAnnotations(filterInfo: filteredContents)
     }
-    
+
     //  SacredPlacesからannotationを作成する
     func createAnnotations(filterInfo: [sacredPlace]) {
         annotations.removeAll()
         for annotationOrigin in filterInfo {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: annotationOrigin.latitude, longitude: annotationOrigin.longitude)
+            let annotation = customMKAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(
+                latitude: annotationOrigin.latitude,
+                longitude: annotationOrigin.longitude
+            )
             annotation.title = annotationOrigin.title
             annotation.subtitle = annotationOrigin.placeName
+            annotation.adress = annotationOrigin.adress
+            annotation.isFavorite = false
+            annotation.id = ""
             annotations.append(annotation)
+
         }
-        
+
     }
     
     func startCreatePin() {
@@ -109,6 +126,7 @@ class Logic: ObservableObject {
         }
     }
 }
+
 
 extension NumberFormatter {
     static var csvNumberFormatter: NumberFormatter {
