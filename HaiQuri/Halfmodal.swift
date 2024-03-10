@@ -22,113 +22,64 @@ struct HalfSheetDetails: View {
     @State var placeName: String
 
     var body: some View {
-        ZStack {
-            Button{
-                print("経路案内")
-            }label: {
-                NavigationLink(destination: ContentView()) {
-                    HStack {
-                        Image(systemName: "location.fill")
-                        Text("経路")
-                            .font(.title)
-                    }
-                }
-                .frame(width: 130, height: 60)
-                .foregroundColor(.white)
-                .background(Color.customButtonColor)
-                .cornerRadius(30.0)
-                .shadow(radius: 3)
-                .padding(.top, 150)
+        VStack {
+            headerSection
+            detailSection
+                .padding(.bottom, 10)
+            routeButton
+                .padding(.top, 10)
+        }
+        .padding()
+        .background(Color(UIColor.systemBackground))
+        .padding(.horizontal, 10)
+    }
+
+    private var headerSection: some View {
+        HStack {
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.primary)
+            Spacer()
+            Button(action: {
+                print("Toggle Like")
+                addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id, placeName: placeName)
+            }) {
+                Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
+                    .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white)
-            .offset(x: 0, y: 80)
-            VStack {
-                Spacer()
+        }
+        .padding(.bottom, 2)
+    }
 
-                Text(title)
-                    .font(.title)
-                Text(placeName)
-                Spacer()
-                // いいねボタン
-                Button{
-                    // ボタンがタップされたときに isFavorited の状態をトグルする
-                    print("トグル変更")
 
-                    //押されたタイミングでデータ取得したい
-                    addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id,placeName: placeName)
-                }label: {
-                    // isFavorited の値に基づいて異なるアイコンを表示
-                    Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
-                        .font(.title)
-                        .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray) // お気に入りの状態によって色も変更する
-                }
-                Spacer()
-            }
-
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Spacer()
-                    Text(title)
-                        .font(.title)
-                    Spacer()
-                    // いいねボタン
-                    Button{
-                        // ボタンがタップされたときに isFavorited の状態をトグルする
-                        print("トグル変更")
-                        //押されたタイミングでデータ取得したい
-                        addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id,placeName: placeName)
-                    }label: {
-                        // isFavorited の値に基づいて異なるアイコンを表示
-                        Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
-                            .font(.title)
-                            .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray) // お気に入りの状態によって色も変更する
-                    }
-                    .offset(x: -10,y: 0)
-                    Spacer()
-                }
-                .offset(x: 20, y:-150)
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text("聖地名")
-                            .font(.system(size: 22))
-                        Spacer()
-                        Text(placeName)
-                            .font(.system(size: 21))
-                        Spacer()
-                    }
-                    Divider()
-                        .frame(height: 1)
-                        .background(Color.gray.opacity(0.5))
-                        .padding(.horizontal, 20)
-                        .offset(x:0, y: -10)
-                }
-                .offset(x: 0,y: -90)
-
-                VStack {
-                    HStack {
-                        Spacer()
-                        Text("聖地の住所")
-                            .font(.system(size: 22))
-                        Spacer()
-                        Text(adress)
-                            .font(.system(size: 21))
-                        Spacer()
-                    }
-                    Divider()
-                        .frame(height: 1)
-                        .background(Color.gray.opacity(0.5))
-                        .padding(.horizontal, 20)
-                        .offset(x:0, y: -10)
-                }
-                .offset(x: 0,y: -40)
-            }
-
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.white)
+    private var detailSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("聖地名: \(placeName)")
+                .font(.subheadline)
+            Text("聖地の住所: \(adress)")
+                .font(.subheadline)
         }
     }
+
+    private var routeButton: some View {
+        Button(action: {
+            print("経路案内")
+        }) {
+            HStack {
+                Image(systemName: "location.fill")
+                Text("経路")
+                    .foregroundColor(.white)
+            }
+            .padding()
+            .background(Color.customTopBarColor)
+            .cornerRadius(15.0)
+            .shadow(radius: 2)
+        }
+        .padding(.top, 50)
+    }
+
+
+
     func addLike (title: String, latitude: Double, longitude: Double, adress: String, mapID: String, placeName: String){
         let entity = Entity(context: viewContext)
         entity.title = title
@@ -167,13 +118,13 @@ struct HalfSheetDetails: View {
 
 
     func checkIfAlreadyFavorited(id: String) -> Bool {
-          if let _ = entityList.first(where: { $0.mapID == id }) {
-              // id が一致するエンティティが見つかった場合
-              return true
-          }
-          return false
-          // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
-      }
+        if let _ = entityList.first(where: { $0.mapID == id }) {
+            // id が一致するエンティティが見つかった場合
+            return true
+        }
+        return false
+        // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
+    }
 
 }
 
