@@ -17,7 +17,7 @@ struct HalfSheetDetails: View {
     @State var longitude: Double
     @State var adress: String
     @State var placeName: String
-    @Binding var isDelegate: Bool
+    @Binding var isTapped: Bool
     var logic: Logic
 
     var body: some View {
@@ -83,7 +83,7 @@ struct HalfSheetDetails: View {
     private var routeButton: some View {
         Button(action: {
             print("経路案内")
-            isDelegate = true
+            isTapped = true
         }) {
             HStack {
                 Image(systemName: "location.fill")

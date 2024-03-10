@@ -32,7 +32,7 @@ struct ContentView: View {
                                 latitude: logic.modalInfo.latitude,
                                 longitude: logic.modalInfo.longitude,
                                 adress: logic.modalInfo.adress,
-                                placeName: logic.modalInfo.placeName, isDelegate: $isTapped, logic: logic
+                                placeName: logic.modalInfo.placeName, isTapped: $isTapped, logic: logic
                             )
                             .presentationDetents([.half])
                         }
