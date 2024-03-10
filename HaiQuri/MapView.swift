@@ -38,6 +38,7 @@ struct MapView: UIViewRepresentable {
         mapView.userTrackingMode = .follow
         mapView.delegate = coordinator
         mapView.userTrackingMode = .followWithHeading
+        logics.readCSV()
 
 
         return mapView
