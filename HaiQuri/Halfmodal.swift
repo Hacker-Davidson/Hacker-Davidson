@@ -36,8 +36,9 @@ struct HalfSheetDetails: View {
 
     private var headerSection: some View {
         HStack {
+            Spacer()
             Text(title)
-                .font(.headline)
+                .font(.system(size: 25))
                 .foregroundColor(.primary)
             Spacer()
             Button(action: {
@@ -46,18 +47,38 @@ struct HalfSheetDetails: View {
             }) {
                 Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
                     .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray)
+                    .font(.system(size: 25))
             }
+            Spacer()
         }
-        .padding(.bottom, 2)
+        .padding(.top, 30)
     }
 
 
     private var detailSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("聖地名: \(placeName)")
-                .font(.subheadline)
-            Text("聖地の住所: \(adress)")
-                .font(.subheadline)
+        VStack(spacing: 40) {
+            Spacer()
+            HStack {
+                Spacer()
+                Text("聖地名")
+                    .font(.system(size: 20))
+                Spacer()
+                Text(placeName)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+            }
+
+            HStack {
+                Spacer()
+                Text("聖地の住所")
+                    .font(.system(size: 20))
+                Spacer()
+                Text(adress)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+            }
         }
     }
 
