@@ -22,6 +22,7 @@
 		3B7259A22B9C12F80089814E /* Entity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7259A02B9C12F80089814E /* Entity+CoreDataClass.swift */; };
 		3B7259A32B9C12F80089814E /* Entity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7259A12B9C12F80089814E /* Entity+CoreDataProperties.swift */; };
 		3B7259A52B9C13140089814E /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7259A42B9C13140089814E /* Persistance.swift */; };
+		3BCA86F22B9D5A1B0090BD53 /* UIApplication+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCA86F12B9D5A1B0090BD53 /* UIApplication+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3B7259A02B9C12F80089814E /* Entity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3B7259A12B9C12F80089814E /* Entity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3B7259A42B9C13140089814E /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		3BCA86F12B9D5A1B0090BD53 /* UIApplication+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				3B20BB5A2B9A9CDD00A720EA /* HaiQuriApp.swift */,
 				3B20BB5C2B9A9CDD00A720EA /* ContentView.swift */,
 				08A1ED592B9AA559005E1AAD /* Logic.swift */,
+				3BCA86F12B9D5A1B0090BD53 /* UIApplication+ext.swift */,
 				08F6F25A2B9C6C1700BC9AB2 /* SearchBar.swift */,
 				08A1ED572B9AA49E005E1AAD /* seichi.csv */,
 				3B20BB6E2B9AC4B800A720EA /* WebView.swift */,
@@ -180,6 +183,7 @@
 				08A1ED5A2B9AA559005E1AAD /* Logic.swift in Sources */,
 				3B7259A32B9C12F80089814E /* Entity+CoreDataProperties.swift in Sources */,
 				3B72599F2B9C12820089814E /* HaiQuri.xcdatamodeld in Sources */,
+				3BCA86F22B9D5A1B0090BD53 /* UIApplication+ext.swift in Sources */,
 				3B7259A52B9C13140089814E /* Persistance.swift in Sources */,
 				3B20BB712B9AC7C900A720EA /* Halfmodal.swift in Sources */,
 				3B20BB5B2B9A9CDD00A720EA /* HaiQuriApp.swift in Sources */,

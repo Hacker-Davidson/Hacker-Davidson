@@ -30,14 +30,15 @@ struct SearchBar: View {
                         .padding(.leading, 300)
                         .offset(x: -50, y: 0)
                         .onTapGesture {
-                                inputText = ""
-                            }
-                    }
+                            inputText = ""
+                            UIApplication.shared.endEditing()
+                        }
                 }
-                Button(action: {
-                    logic.serchPlacesUsingAnimeTitle(title: inputText)
-                }, label: {
-                    Text("検索")
+            }
+            Button(action: {
+                logic.serchPlacesUsingAnimeTitle(title: inputText)
+            }, label: {
+                Text("検索")
                 })
             }
             .offset(x: -20, y: -20)
