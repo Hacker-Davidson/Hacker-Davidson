@@ -15,11 +15,7 @@ struct HalfsheetView: View {
         Button("シートを表示") {
             isShowSheet.toggle()
         }
-        .sheet(isPresented: $isShowSheet) {
-            // before → HalfSheetDetails(show: $isShowSheet)
-            HalfSheetDetails(show: $isShowSheet, id: id, isFavorited: false, title: title, latitude: latitude, longitude: longitude, adress: adress, placeName: placeName) // ← after
-                .presentationDetents([.medium])
-        }
+
     }
 }
 
@@ -35,7 +31,6 @@ struct HalfSheetDetails: View {
     @Binding var show: Bool
     // before → @State private var id: String = ""
     @State var id: String // ← after
-    @State var isFavorited: Bool
     @State var title: String
     @State var latitude: Double
     @State var longitude: Double
@@ -70,6 +65,29 @@ struct HalfSheetDetails: View {
                        .offset(x: 0, y: 80)
             VStack {
                 Spacer()
+
+                Text(title)
+                    .font(.title)
+                Text(placeName)
+                Spacer()
+                // いいねボタン
+                Button{
+                    // ボタンがタップされたときに isFavorited の状態をトグルする
+                    print("トグル変更")
+
+                    //押されたタイミングでデータ取得したい
+                    addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id,placeName: placeName)
+                }label: {
+                    // isFavorited の値に基づいて異なるアイコンを表示
+                    Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
+                        .font(.title)
+                        .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray) // お気に入りの状態によって色も変更する
+                }
+                Spacer()
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+>>>>>>> Stashed changes
                 HStack {
                     Spacer()
                     Text(title)
@@ -128,7 +146,10 @@ struct HalfSheetDetails: View {
                 }
                 .offset(x: 0,y: -40)
             }
-            .offset(x: 0, y: -80)
+
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.white)
+>>>>>>> Stashed changes
         }
     }
     func addLike (title: String, latitude: Double, longitude: Double, adress: String, mapID: String, placeName: String){
@@ -146,7 +167,6 @@ struct HalfSheetDetails: View {
     func confirmLikeList(id: String) {
         for entity in entityList {
             if entity.mapID == id {
-                isFavorited = entity.isFavorite
                 self.id = entity.mapID ?? ""
                 title = entity.title ?? ""
                 latitude = entity.latitude
@@ -158,7 +178,6 @@ struct HalfSheetDetails: View {
                 print(self.latitude)
                 print(self.adress)
                 print(self.placeName)
-                print(self.isFavorited)
 
 
             } else {
@@ -168,14 +187,16 @@ struct HalfSheetDetails: View {
     }
 
     // お気に入りがすでに登録されているか確認する関数
-    func checkIfAlreadyFavorited() {
-        if let _ = entityList.first(where: { $0.mapID == id }) {
-            // id が一致するエンティティが見つかった場合
-            self.isFavorited = true
-            print(entityList)
-        }
-        // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
-    }
+
+
+    func checkIfAlreadyFavorited(id: String) -> Bool {
+          if let _ = entityList.first(where: { $0.mapID == id }) {
+              // id が一致するエンティティが見つかった場合
+              return true
+          }
+          return false
+          // id が一致するエンティティが見つからない場合は何もしない（isFavorited はそのまま）
+      }
 
 }
 

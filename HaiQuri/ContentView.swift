@@ -15,6 +15,20 @@ struct ContentView: View {
             ZStack {  // --- 1
 
                 MapView(logics: logic)
+                    .sheet(isPresented: $logic.isShowSheet) {
+                        // before → HalfSheetDetails(show: $isShowSheet)
+                        HalfSheetDetails(
+                            show: $logic.isShowSheet,
+                            id: logic.modalInfo.id ,
+                            title: logic.modalInfo.title ?? "",
+                            latitude: logic.modalInfo.latitude,
+                            longitude: logic.modalInfo.longitude,
+                            adress: logic.modalInfo.adress,
+                            placeName: logic.modalInfo.placeName ?? ""
+                        ) // ← after
+                            .presentationDetents([.medium])
+                    }
+
                 SearchBar(logic: logic)
                 FloatButton()
                 ///////////////////////////////////////////RouteFinishButtonは道案内するときにだけ表示させたい

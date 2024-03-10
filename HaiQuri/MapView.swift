@@ -13,6 +13,7 @@ import CoreLocation
 
 struct MapView: UIViewRepresentable {
     @ObservedObject var logics: Logic
+    @State  var isShowSheet: Bool = false
     func makeUIView(context: Context) -> MKMapView {
         @State var deleteAnnotations = logics.deleteAnnotations
         let mapView = MKMapView()
@@ -34,26 +35,42 @@ struct MapView: UIViewRepresentable {
         region.span.latitudeDelta = 0.02
         region.span.longitudeDelta = 0.02
         mapView.setRegion(region, animated: true)
-
         mapView.mapType = .hybrid
         mapView.userTrackingMode = .follow
+        mapView.delegate = coordinator
         mapView.userTrackingMode = .followWithHeading
 
 
         return mapView
     }
-
     func updateUIView(_ mapView: MKMapView, context: Context) {
         print(logics.annotations)
         mapView.removeAnnotations(mapView.annotations)
         for annotation in logics.annotations {
             mapView.addAnnotation(annotation)
         }
+        let coordinate: CLLocationCoordinate2D  = CLLocationCoordinate2D(latitude: logics.filteredContents.first?.latitude as? Double ?? 0.0, longitude: logics.filteredContents.first?.longitude as? Double ?? 0.0)
+        mapView.setCenter(coordinate, animated: true)
     }
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 }
+
+class CustomMKMapView: MKMapView, MKMapViewDelegate {
+    var logics: Logic
+
+    init(frame: CGRect, logics: Logic) {
+        self.logics = logics
+        super.init(frame: frame)
+        self.delegate = self
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 
 class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     var parent: MapView
@@ -84,9 +101,19 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation {
-            logics.animeTitle = annotation.title!!
-            logics.animeSubTitle = annotation.subtitle!!
+        if let annotation = view.annotation as? Logic.customMKAnnotation {
+            logics.modalInfo = sacredPlace(
+                id: annotation.id,
+                title: annotation.title ?? "",
+                placeName: annotation.subtitle ?? "",
+                adress: annotation.adress,
+                latitude: annotation.coordinate.latitude,
+                longitude: annotation.coordinate.longitude,
+                isFavorite: annotation.isFavorite
+            )
+            logics.isShowSheet.toggle()
+        } else {
+            print("取得")
         }
     }
 }
