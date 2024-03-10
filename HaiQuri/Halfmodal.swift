@@ -56,10 +56,6 @@ struct HalfSheetDetails: View {
                            .shadow(radius: 3)
                            .padding(.top, 150)
                        }
-                       .onAppear{
-                           checkIfAlreadyFavorited()
-                           //idが一致しているかどうかを調べる
-                       }
                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                        .background(Color.white)
                        .offset(x: 0, y: 80)
@@ -87,7 +83,6 @@ struct HalfSheetDetails: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
->>>>>>> Stashed changes
                 HStack {
                     Spacer()
                     Text(title)
@@ -97,14 +92,13 @@ struct HalfSheetDetails: View {
                     Button{
                         // ボタンがタップされたときに isFavorited の状態をトグルする
                         print("トグル変更")
-                        isFavorited.toggle()
                         //押されたタイミングでデータ取得したい
                         addLike(title: title, latitude: latitude, longitude: longitude, adress: adress, mapID: id,placeName: placeName)
                     }label: {
                         // isFavorited の値に基づいて異なるアイコンを表示
-                        Image(systemName: isFavorited ? "heart.fill" : "heart")
+                        Image(systemName: checkIfAlreadyFavorited(id: id) ? "heart.fill" : "heart")
                             .font(.title)
-                            .foregroundColor(isFavorited ? .red : .gray) // お気に入りの状態によって色も変更する
+                            .foregroundColor(checkIfAlreadyFavorited(id: id) ? .red : .gray) // お気に入りの状態によって色も変更する
                     }
                     .offset(x: -10,y: 0)
                     Spacer()
@@ -149,7 +143,6 @@ struct HalfSheetDetails: View {
 
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)
->>>>>>> Stashed changes
         }
     }
     func addLike (title: String, latitude: Double, longitude: Double, adress: String, mapID: String, placeName: String){
