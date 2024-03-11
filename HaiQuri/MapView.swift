@@ -14,6 +14,7 @@ struct MapView: UIViewRepresentable {
     @ObservedObject var logics: Logic
 //    @State var isShowSheet: Bool
     @Binding var isTapped: Bool
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         let coordinator = context.coordinator
@@ -39,8 +40,6 @@ struct MapView: UIViewRepresentable {
         mapView.delegate = coordinator
         mapView.userTrackingMode = .followWithHeading
         logics.readCSV()
-
-
         return mapView
     }
 
@@ -57,7 +56,7 @@ struct MapView: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self, isShowCameraCom: .constant(false))
     }
 
     func createRoot(_ mapView: MKMapView, isTapped: Bool) {
@@ -105,14 +104,18 @@ class CustomMKMapView: MKMapView, MKMapViewDelegate {
 class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
     var parent: MapView
     var logics: Logic
+    let targetLocation = CLLocation(latitude: 35.6811673, longitude: 139.7670516) // 目的地の緯度経度
     var locationManager = CLLocationManager()
-
-    init(_ parent: MapView) {
+    let radius: CLLocationDistance = 100 // 閾値 (100メートル)
+    @Binding var isShowCameraCom: Bool
+    init(_ parent: MapView, isShowCameraCom: Binding<Bool>) {
         self.parent = parent
         self.logics = parent.logics
+        self._isShowCameraCom = isShowCameraCom
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
 
@@ -155,6 +158,19 @@ class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 4.0
         return renderer
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        guard let currentLocation = locations.last else {
+            print("マジマジ")
+            return }
+        let distance = currentLocation.distance(from: targetLocation)
+        if distance >= radius {
+            // 目的地の半径100m以内に入った場合の処理
+            logics.isShowCam = true
+
+            // 他の必要な処理...
+        }
     }
 }
 

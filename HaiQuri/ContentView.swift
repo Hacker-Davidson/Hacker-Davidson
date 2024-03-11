@@ -17,6 +17,10 @@ struct ContentView: View {
     @State private var isDelegate: Bool = false
     @State var inputText: String = ""
     @State var watchSearchBar: Bool = true // Mapの時true
+    @State private var showImagePicker = false
+    @State private var capturedImage: UIImage?
+    @State var isShowCameracomfirm: Bool = false
+
     let animeTitleList: [String] = ["けいおん", "涼宮ハルヒの憂鬱", "ちはやふる", "東京喰種", "四月は君の嘘", "けものフレンズ", "月がきれい", "聲の形"]
     init() {
         let appearance = UITabBarAppearance()
@@ -69,7 +73,20 @@ struct ContentView: View {
                     }
                     .padding(.bottom, 550)
 
-                }  //
+                }
+                .alert("目的地に近づきました", isPresented: $logic.isShowCam) {
+                    Button("閉じる") {
+                    
+                    }
+                    Button("カメラを開く") {
+                        showImagePicker = true
+                    }
+                } message: {
+                    VStack {
+                        Text("写真を撮って思い出を残しましょう！")
+                    }
+                }
+                //
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
@@ -104,6 +121,9 @@ struct ContentView: View {
                 }
             })
         }
+        .sheet(isPresented: $isShowCameracomfirm) {
+                 ImagePickerView(isShown: $showImagePicker, capturedImage: $capturedImage)
+             }
         //戻るボタン色変更
         .accentColor(Color.white)
     }
