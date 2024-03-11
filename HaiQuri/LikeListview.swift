@@ -30,6 +30,13 @@ struct LikeListview: View {
                         .font(.caption)
                 }
             }
+            .frame(width: 390, height: 660)
+            Text("いいねリスト")
+                .offset(x: 0, y: -360) // 位置を調整
+                .font(.system(size: 20)) // フォントサイズを設定
+                .font(.title)
+                .foregroundColor(.white) // 文字色を白に設定
         }
     }
 }
+

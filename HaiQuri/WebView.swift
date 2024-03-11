@@ -31,6 +31,11 @@ struct ChatView: View {
             Color("TopBarColor")
                 .edgesIgnoringSafeArea(.all) // Safe Areaを無視
             WebView()
+            Text("掲示板")
+                .offset(x: 0, y: -360) // 位置を調整
+                .font(.system(size: 20)) // フォントサイズを設定
+                .font(.title)
+                .foregroundColor(.white) // 文字色を白に設定
 
         }
 //            .edgesIgnoringSafeArea(.all) // オプション: セーフエリアを無視して全画面で表示
