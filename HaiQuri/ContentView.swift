@@ -18,7 +18,13 @@ struct ContentView: View {
     @State var inputText: String = ""
     @State var watchSearchBar: Bool = true // Mapの時true
     let animeTitleList: [String] = ["けいおん", "涼宮ハルヒの憂鬱", "ちはやふる", "東京喰種", "四月は君の嘘", "けものフレンズ", "月がきれい", "聲の形"]
-
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(Color.customTopBarColor)
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
     var body: some View {
         NavigationView {
             TabView(selection: $selection) {
