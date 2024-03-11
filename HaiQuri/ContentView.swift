@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var isTapped: Bool = false
     @State private var isDelegate: Bool = false
     @State var inputText: String = ""
+    @State var watchSearchBar: Bool = true // Mapの時true
     let animeTitleList: [String] = ["けいおん", "涼宮ハルヒの憂鬱", "ちはやふる", "東京喰種", "四月は君の嘘", "けものフレンズ", "月がきれい", "聲の形"]
 
     var body: some View {
@@ -67,17 +68,34 @@ struct ContentView: View {
                     Label("Map", systemImage: "map")
                 }
                 .tag(1)
+                .onChange(of: selection) { newSelection in
+                    // MapViewタブが選択されたときだけsearchbarを表示
+                    watchSearchBar = newSelection == 1
+                }
                 ChatView()   // Viewファイル②
                     .tabItem {
-                        FloatButton()
+                        FloatButton(watchSearchBar: $watchSearchBar)
+                            .onTapGesture {
+                                print("Before/ContentView/watchSearchBar\(watchSearchBar)")
+
+                                watchSearchBar
+                                    .toggle()
+                                print("After/ContentView/watchSearchBar\(watchSearchBar)")
+
+                            }
                     }
                     .tag(2)
+                LikeListview(logic: logic)
+                    .tabItem { Label("いいね", systemImage: "heart.fill") }
+                    .tag(3)
             } // TabView ここまで
             .navigationBarItems(trailing: Button(action: {
                 // アクション
             }) {
-                SearchBar(inputText: $inputText, title: $title, logic: logic)
-                    .offset(x: 0, y: 17)
+                if watchSearchBar {
+                    SearchBar(inputText: $inputText, title: $title, logic: logic)
+                        .offset(x: 0, y: 17)
+                }
             })
         }
         //戻るボタン色変更
@@ -88,6 +106,8 @@ struct ContentView: View {
 
 //掲示板に飛ぶボタン
 struct FloatButton: View {
+    @Binding var watchSearchBar: Bool
+
     var body: some View {
         HStack { // --- 2
             NavigationLink(destination: ChatView()) {
@@ -97,6 +117,9 @@ struct FloatButton: View {
                     Text("掲示板")
                     Spacer()
                 }
+            }
+            .onTapGesture {
+                watchSearchBar.toggle()
             }
             .foregroundColor(.white)
             .font(.system(size: 18))

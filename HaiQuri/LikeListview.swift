@@ -18,16 +18,18 @@ struct LikeListview: View {
     //追加
     @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
-        List(entityList, id: \.placeName) { entity in
-            VStack(alignment: .leading){
-                Text(entity.placeName ?? "")
-                    .fontWeight(.bold)
-                Text(entity.title ?? "")
-                Text(entity.adress ?? "")
-                    .font(.caption)
+        ZStack {
+            Color("TopBarColor")
+                .edgesIgnoringSafeArea(.all) // Safe Areaを無視
+            List(entityList, id: \.placeName) { entity in
+                VStack(alignment: .leading){
+                    Text(entity.placeName ?? "")
+                        .fontWeight(.bold)
+                    Text(entity.title ?? "")
+                    Text(entity.adress ?? "")
+                        .font(.caption)
+                }
             }
-
-
         }
     }
 }
